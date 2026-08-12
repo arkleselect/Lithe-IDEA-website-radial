@@ -1,0 +1,17 @@
+---
+import { site } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <a class="brand" href="/"><img src="/assets/lithe-icon.png" width="24" height="24" alt="" /><span>Lithe</span></a>
+      <p class="footer-note">A familiar IDE core with a lighter footprint.</p>
+    </div>
+    <div class="footer-links">
+      <a href={site.repository} target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href={site.release} target="_blank" rel="noreferrer">Releases ↗</a>
+      <a href="mailto:hello@lithe.dev">联系团队</a>
+    </div>
+    <p class="footer-meta">原生 macOS IDE · Apache-2.0</p>
+  </div>
+</footer>

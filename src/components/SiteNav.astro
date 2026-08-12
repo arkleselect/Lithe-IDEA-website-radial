@@ -1,0 +1,35 @@
+---
+import { navItems, site } from '../data/site';
+const isEnglish = Astro.url.pathname.startsWith('/en');
+const localizedNavItems = isEnglish
+  ? [{ label: 'Product', href: '#product' }, { label: 'Workflow', href: '#workflow' }, { label: 'Download', href: '#download' }]
+  : navItems;
+---
+<header class="site-header">
+  <nav class="nav shell" aria-label={isEnglish ? 'Main navigation' : '主导航'}>
+    <a class="brand" href={isEnglish ? '/en/' : '/'} aria-label={isEnglish ? 'Lithe home' : 'Lithe 首页'}>
+      <img src="/assets/lithe-icon.png" width="28" height="28" alt="" />
+      <span>Lithe</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+      <span class="sr-only">{isEnglish ? 'Open navigation' : '打开导航'}</span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <div class="nav-links" id="mobile-nav">
+      {localizedNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href={isEnglish ? '/' : '/en/'} lang={isEnglish ? 'zh-CN' : 'en'}>{isEnglish ? '中文' : 'EN'}</a>
+      <a class="nav-cta" href={site.release} target="_blank" rel="noreferrer">{isEnglish ? 'Download' : '下载'} <span aria-hidden="true">↗</span></a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('is-open', !open);
+  });
+</script>

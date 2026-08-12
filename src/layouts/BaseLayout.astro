@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'zh-CN' | 'en';
+}
+
+const { title = site.name, description = site.description, lang = 'zh-CN' } = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/assets/lithe-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#05040a" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      const isMacOS = /Macintosh|Mac OS X/.test(navigator.userAgent) || navigator.platform.startsWith('Mac');
+      if (isMacOS) {
+        document.querySelectorAll<SVGElement>('[data-mac-icon]').forEach((icon) => {
+          icon.classList.add('is-visible');
+        });
+      }
+
+      const hero = document.querySelector<HTMLElement>('[data-hero]');
+      const codeLayer = document.querySelector<HTMLElement>('[data-hero-code]');
+      const heroVisual = document.querySelector<HTMLElement>('.hero-visual-centered');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (hero && codeLayer && heroVisual && !reducedMotion) {
+        let frame = 0;
+        const updateHeroDepth = () => {
+          const progress = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / Math.max(window.innerHeight, 1)));
+          codeLayer.style.setProperty('--code-scroll-y', `${progress * -22}px`);
+          heroVisual.style.setProperty('--window-scroll-y', `${progress * -44}px`);
+          hero.style.setProperty('--glow-scroll-y', `${progress * -10}px`);
+          frame = 0;
+        };
+        const requestHeroDepth = () => {
+          if (!frame) frame = window.requestAnimationFrame(updateHeroDepth);
+        };
+        window.addEventListener('scroll', requestHeroDepth, { passive: true });
+        requestHeroDepth();
+      }
+    </script>
+  </body>
+</html>
