@@ -33,14 +33,12 @@ const { title = site.name, description = site.description, lang = 'zh-CN' } = As
 
       const hero = document.querySelector<HTMLElement>('[data-hero]');
       const codeLayer = document.querySelector<HTMLElement>('[data-hero-code]');
-      const heroVisual = document.querySelector<HTMLElement>('.hero-visual-centered');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (hero && codeLayer && heroVisual && !reducedMotion) {
+      if (hero && codeLayer && !reducedMotion) {
         let frame = 0;
         const updateHeroDepth = () => {
           const progress = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / Math.max(window.innerHeight, 1)));
           codeLayer.style.setProperty('--code-scroll-y', `${progress * -22}px`);
-          heroVisual.style.setProperty('--window-scroll-y', `${progress * -44}px`);
           hero.style.setProperty('--glow-scroll-y', `${progress * -10}px`);
           frame = 0;
         };
