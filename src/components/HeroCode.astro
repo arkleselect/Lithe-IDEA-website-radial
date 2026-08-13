@@ -2,22 +2,15 @@
   <div class="hero-code-line"><span class="hero-code-line-number">18</span><code><span class="swift-attribute">@MainActor</span></code></div>
   <div class="hero-code-line"><span class="hero-code-line-number">19</span><code><span class="swift-keyword">final class</span> <span class="swift-type">WorkspaceModel</span>: ObservableObject &#123;</code></div>
   <div class="hero-code-line"><span class="hero-code-line-number">20</span><code>    <span class="swift-attribute">@Published</span> <span class="swift-keyword">private(set) var</span> changes: [<span class="swift-type">Change</span>] = []</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">21</span><code>    <span class="swift-attribute">@Published</span> <span class="swift-keyword">private(set) var</span> isApplying = <span class="swift-keyword">false</span></code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">21</span><code>    <span class="swift-keyword">private let</span> project: <span class="swift-type">ProjectIndex</span></code></div>
   <div class="hero-code-line"><span class="hero-code-line-number">22</span><code></code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">23</span><code>    <span class="swift-keyword">private let</span> project: <span class="swift-type">ProjectIndex</span></code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">24</span><code>    <span class="swift-keyword">private let</span> editor: <span class="swift-type">EditorSession</span></code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">25</span><code></code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">26</span><code>    <span class="swift-keyword">func</span> <span class="swift-function">reviewChanges</span>() <span class="swift-keyword">async throws</span> &#123;</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">27</span><code>        changes = <span class="swift-keyword">try await</span> project.pendingChanges()</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">28</span><code>        <span class="swift-keyword">await</span> editor.reveal(changes)</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">29</span><code>    &#125;</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">30</span><code></code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">31</span><code>    <span class="swift-keyword">func</span> <span class="swift-function">applyChanges</span>() <span class="swift-keyword">async throws</span> &#123;</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">32</span><code>        isApplying = <span class="swift-keyword">true</span></code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">33</span><code>        <span class="swift-keyword">defer</span> &#123; isApplying = <span class="swift-keyword">false</span> &#125;</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">34</span><code></code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">35</span><code>        <span class="swift-keyword">try await</span> project.apply(changes)</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">36</span><code>        <span class="swift-keyword">await</span> editor.refresh()</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">37</span><code>    &#125;</code></div>
-  <div class="hero-code-line"><span class="hero-code-line-number">38</span><code>&#125;</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">23</span><code>    <span class="swift-keyword">func</span> <span class="swift-function">reviewChanges</span>() <span class="swift-keyword">async throws</span> &#123;</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">24</span><code>        changes = <span class="swift-keyword">try await</span> project.pendingChanges()</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">25</span><code>    &#125;</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">26</span><code></code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">27</span><code>    <span class="swift-keyword">func</span> <span class="swift-function">applyChanges</span>() <span class="swift-keyword">async throws</span> &#123;</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">28</span><code>        <span class="swift-keyword">try await</span> project.apply(changes)</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">29</span><code>        changes.removeAll()</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">30</span><code>    &#125;</code></div>
+  <div class="hero-code-line"><span class="hero-code-line-number">31</span><code>&#125;</code></div>
 </div>

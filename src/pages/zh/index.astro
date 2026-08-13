@@ -5,6 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import HeroCode from '../../components/HeroCode.astro';
 import InteractiveWorkbench from '../../components/InteractiveWorkbench.astro';
 import SponsorsSection from '../../components/SponsorsSection.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import { site } from '../../data/site';
 ---
 <BaseLayout lang="zh-CN">
@@ -19,8 +20,13 @@ import { site } from '../../data/site';
         <p class="hero-meta hero-meta-centered">适用于 Apple silicon 与 Intel · SwiftUI / AppKit · Swift 6.2+</p>
       </div>
     </section>
-    <div class="home-content-stage"><figure class="hero-product-preview" data-hero-preview aria-label="Lithe 编辑器界面预览"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe 中的项目树与 Swift 编辑器界面" /></figure><div class="product-demo-layout"><HeroCode /><div class="interactive-app-slot" data-hero-app><InteractiveWorkbench /><div class="interactive-app-occluder" aria-hidden="true"></div></div></div></div>
+    <div class="home-content-stage"><figure class="hero-product-preview" data-hero-preview aria-label="Lithe 编辑器界面预览"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe 中的项目树与 Swift 编辑器界面" /></figure><div class="product-demo-layout"><div class="product-story-steps">
+          <section class="product-story-step product-story-code"><HeroCode /></section>
+          <section class="product-story-step product-story-image"><img src="/assets/lithe-story-overview.png" width="916" height="1717" alt="Lithe product overview" loading="lazy" /></section>
+          <section class="product-story-step product-story-image"><img src="/assets/lithe-story-overview.png" width="916" height="1717" alt="Lithe features overview" loading="lazy" /></section>
+        </div><div class="interactive-app-slot"><InteractiveWorkbench /><div class="interactive-app-occluder" aria-hidden="true"></div></div></div></div>
     <SponsorsSection lang="zh" />
+    <FAQSection lang="zh" />
   </main>
   <SiteFooter />
 </BaseLayout>

@@ -1,0 +1,106 @@
+---
+interface Props { lang?: 'en' | 'zh' | 'ja' | 'ko'; }
+const { lang = 'en' } = Astro.props;
+const copy = {
+  en: {
+    eyebrow: 'FAQ',
+    title: 'A few things worth knowing.',
+    intro: 'Short answers about Lithe, compatibility, and getting started.',
+    items: [
+      ['What is Lithe?', 'Lithe is a lightweight, native macOS IDE built around a familiar IDEA-shaped workflow for AI-assisted development.'],
+      ['Which Macs are supported?', 'Lithe supports Apple silicon and Intel Macs running macOS 13 or later.'],
+      ['Is Lithe open source?', 'Yes. Lithe is developed in the open under the Apache-2.0 license. You can inspect the source, report issues, and contribute on GitHub.'],
+      ['Which languages can the website display?', 'The website is available in English, Simplified Chinese, Japanese, and Korean. English is shown by default.'],
+      ['Where can I report a problem or request a feature?', 'Open an issue in the Lithe GitHub repository with the steps to reproduce, your macOS version, and any useful screenshots or logs.'],
+    ],
+  },
+  zh: {
+    eyebrow: '常见问题',
+    title: '一些你可能想了解的事情。',
+    intro: '关于 Lithe、兼容性与开始使用的简要回答。',
+    items: [
+      ['Lithe 是什么？', 'Lithe 是一款轻量的原生 macOS IDE，保留熟悉的 IDEA 式工作流，并面向 AI 辅助开发。'],
+      ['支持哪些 Mac？', 'Lithe 支持运行 macOS 13 或更高版本的 Apple silicon 与 Intel Mac。'],
+      ['Lithe 是开源的吗？', '是的。Lithe 使用 Apache-2.0 许可证开源开发，你可以在 GitHub 查看源码、反馈问题并参与贡献。'],
+      ['官网支持哪些语言？', '官网支持英文、简体中文、日文和韩文，默认显示英文。'],
+      ['在哪里反馈问题或提出功能建议？', '请在 Lithe 的 GitHub 仓库创建 Issue，并附上复现步骤、macOS 版本以及有帮助的截图或日志。'],
+    ],
+  },
+  ja: {
+    eyebrow: 'よくある質問',
+    title: 'Lithe について知っておきたいこと。',
+    intro: 'Lithe、互換性、使い始める方法について簡潔にお答えします。',
+    items: [
+      ['Lithe とは何ですか？', 'Lithe は、AI 支援開発のために馴染みのある IDEA 風ワークフローを備えた、軽量なネイティブ macOS IDE です。'],
+      ['どの Mac に対応していますか？', 'macOS 13 以降を搭載した Apple silicon および Intel Mac に対応しています。'],
+      ['Lithe はオープンソースですか？', 'はい。Apache-2.0 ライセンスで公開されており、GitHub でソースの確認、問題報告、開発への参加ができます。'],
+      ['ウェブサイトはどの言語に対応していますか？', '英語、簡体字中国語、日本語、韓国語に対応し、既定では英語を表示します。'],
+      ['問題や機能要望はどこに報告できますか？', '再現手順、macOS のバージョン、参考になる画像やログを添えて、Lithe の GitHub リポジトリに Issue を作成してください。'],
+    ],
+  },
+  ko: {
+    eyebrow: '자주 묻는 질문',
+    title: 'Lithe에 대해 알아둘 내용.',
+    intro: 'Lithe, 호환성, 시작 방법에 관한 간단한 답변입니다.',
+    items: [
+      ['Lithe는 무엇인가요?', 'Lithe는 AI 지원 개발을 위해 익숙한 IDEA 스타일 워크플로를 제공하는 가벼운 네이티브 macOS IDE입니다.'],
+      ['어떤 Mac을 지원하나요?', 'macOS 13 이상을 실행하는 Apple silicon 및 Intel Mac을 지원합니다.'],
+      ['Lithe는 오픈 소스인가요?', '네. Apache-2.0 라이선스로 공개 개발되며 GitHub에서 소스 확인, 문제 보고, 기여가 가능합니다.'],
+      ['웹사이트는 어떤 언어를 지원하나요?', '영어, 중국어 간체, 일본어, 한국어를 지원하며 기본 언어는 영어입니다.'],
+      ['문제나 기능 요청은 어디에 남기나요?', '재현 단계, macOS 버전, 도움이 되는 스크린샷이나 로그와 함께 Lithe GitHub 저장소에 Issue를 작성해 주세요.'],
+    ],
+  },
+}[lang];
+---
+
+<section class="faq-section" aria-labelledby={`faq-title-${lang}`}>
+  <div class="shell faq-shell">
+    <header class="faq-centered-heading">
+      <h2 id={`faq-title-${lang}`}>{copy.eyebrow}</h2>
+    </header>
+    <div class="faq-list" data-faq-list>
+      {copy.items.map(([question, answer]) => (
+        <details class="faq-item">
+          <summary><span>{question}</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+          <div class="faq-answer"><p>{answer}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-faq-list]').forEach((list) => {
+    list.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach((item) => {
+      const summary = item.querySelector<HTMLElement>('summary');
+      const answer = item.querySelector<HTMLElement>('.faq-answer');
+      if (!summary || !answer) return;
+
+      summary.addEventListener('click', (event) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        event.preventDefault();
+        answer.getAnimations().forEach((animation) => animation.cancel());
+
+        if (!item.open) {
+          item.classList.add('is-expanded');
+          item.open = true;
+          answer.animate(
+            [{ height: '0px', opacity: 0 }, { height: `${answer.scrollHeight}px`, opacity: 1 }],
+            { duration: 260, easing: 'cubic-bezier(.22, 1, .36, 1)' },
+          ).finished.then(() => { answer.style.height = 'auto'; });
+          return;
+        }
+
+        item.classList.remove('is-expanded');
+        const animation = answer.animate(
+          [{ height: `${answer.scrollHeight}px`, opacity: 1 }, { height: '0px', opacity: 0 }],
+          { duration: 210, easing: 'cubic-bezier(.4, 0, 1, 1)' },
+        );
+        animation.finished.then(() => {
+          item.open = false;
+          answer.style.height = '';
+        });
+      });
+    });
+  });
+</script>

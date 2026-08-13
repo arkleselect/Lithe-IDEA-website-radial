@@ -33,20 +33,48 @@ const { title = site.name, description = site.description, lang = 'en' } = Astro
 
       const hero = document.querySelector<HTMLElement>('[data-hero]');
       const codeLayer = document.querySelector<HTMLElement>('[data-hero-code]');
+      const storySteps = Array.from(document.querySelectorAll<HTMLElement>('.product-story-step'));
+      const codeStep = document.querySelector<HTMLElement>('.product-story-code');
+      const codeLines = Array.from(document.querySelectorAll<HTMLElement>('.product-story-step .hero-code-line'));
       const preview = document.querySelector<HTMLElement>('[data-hero-preview]');
-      const appSlot = document.querySelector<HTMLElement>('[data-hero-app]');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (hero && !reducedMotion) {
         let frame = 0;
         const updateHeroDepth = () => {
           const rawProgress = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / Math.max(window.innerHeight * 0.72, 1)));
           const progress = rawProgress * rawProgress * (3 - 2 * rawProgress);
+          const previewRawProgress = Math.max(0, Math.min(1, (rawProgress - 0.08) / 0.82));
+          const previewProgress = previewRawProgress * previewRawProgress * (3 - 2 * previewRawProgress);
           hero.style.setProperty('--hero-scroll-progress', String(progress));
           hero.style.setProperty('--hero-glow-opacity', String(1 - progress));
           codeLayer?.style.setProperty('--code-scroll-y', `${progress * -22}px`);
           hero.style.setProperty('--glow-scroll-y', `${progress * -10}px`);
-          preview?.style.setProperty('--preview-scroll-y', `${progress * -28}px`);
-          appSlot?.style.setProperty('--app-scroll-y', `${(1 - progress) * 30}px`);
+          preview?.style.setProperty('--preview-progress', String(previewProgress));
+          preview?.style.setProperty('--preview-scroll-y', `${(1 - previewProgress) * 150}px`);
+          preview?.style.setProperty('--preview-rotate-x', `${(1 - previewProgress) * 17}deg`);
+          preview?.style.setProperty('--preview-scale', String(0.93 + previewProgress * 0.07));
+          if (codeStep && codeLines.length) {
+            const stepTop = codeStep.getBoundingClientRect().top;
+            const codeRawProgress = Math.max(0, Math.min(1, (window.innerHeight * 0.82 - stepTop) / Math.max(window.innerHeight * 0.62, 1)));
+            const codeProgress = codeRawProgress * codeRawProgress * (3 - 2 * codeRawProgress);
+            codeStep.style.setProperty('--story-code-opacity', String(Math.min(1, codeProgress * 2.4)));
+            const playhead = codeProgress * (codeLines.length + 1);
+            codeLines.forEach((line, index) => {
+              const lineProgress = Math.max(0, Math.min(1, playhead - index));
+              line.style.setProperty('--line-reveal', String(lineProgress));
+              line.style.setProperty('--line-y', `${(1 - lineProgress) * 10}px`);
+            });
+          }
+          storySteps.forEach((step) => {
+            if (step === codeStep) return;
+            const rect = step.getBoundingClientRect();
+            const stepCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(stepCenter - window.innerHeight / 2);
+            const reveal = Math.max(0, Math.min(1, 1 - distance / Math.max(window.innerHeight * 0.62, 1)));
+            const easedReveal = reveal * reveal * (3 - 2 * reveal);
+            step.style.setProperty('--story-step-opacity', String(easedReveal));
+            step.style.setProperty('--story-step-y', `${(1 - easedReveal) * 34}px`);
+          });
           frame = 0;
         };
         const requestHeroDepth = () => {

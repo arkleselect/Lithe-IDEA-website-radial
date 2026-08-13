@@ -5,6 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import HeroCode from '../../components/HeroCode.astro';
 import InteractiveWorkbench from '../../components/InteractiveWorkbench.astro';
 import SponsorsSection from '../../components/SponsorsSection.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import { site } from '../../data/site';
 ---
 <BaseLayout lang="en" title="Lithe" description="The IDEA-shaped core for AI-assisted development.">
@@ -16,11 +17,16 @@ import { site } from '../../data/site';
         <img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe project tree and Swift editor interface" />
       </figure>
       <div class="product-demo-layout">
-        <HeroCode />
-        <div class="interactive-app-slot" data-hero-app><InteractiveWorkbench /><div class="interactive-app-occluder" aria-hidden="true"></div></div>
+        <div class="product-story-steps">
+          <section class="product-story-step product-story-code"><HeroCode /></section>
+          <section class="product-story-step product-story-image"><img src="/assets/lithe-story-overview.png" width="916" height="1717" alt="Lithe product overview" loading="lazy" /></section>
+          <section class="product-story-step product-story-image"><img src="/assets/lithe-story-overview.png" width="916" height="1717" alt="Lithe features overview" loading="lazy" /></section>
+        </div>
+        <div class="interactive-app-slot"><InteractiveWorkbench /><div class="interactive-app-occluder" aria-hidden="true"></div></div>
       </div>
     </div>
     <SponsorsSection lang="en" />
+    <FAQSection lang="en" />
   </main>
   <SiteFooter />
 </BaseLayout>
