@@ -1,0 +1,13 @@
+---
+interface Props { lang?: 'en' | 'zh' | 'ja' | 'ko'; }
+const { lang = 'en' } = Astro.props;
+const copy = {
+  en: { title: 'An IDE that keeps AI-assisted development understandable.', items: [['01', 'See every change', 'Generated edits stay visible, contextual, and easy to review.'], ['02', 'Navigate with confidence', 'A familiar project core keeps large workspaces within reach.'], ['03', 'Stay native', 'SwiftUI and AppKit keep the experience light, fast, and at home on macOS.']] },
+  zh: { title: '让 AI 辅助开发始终清晰可见。', items: [['01', '看见每次改动', '生成的修改保持可见、有上下文，并且容易审查。'], ['02', '自信地导航', '熟悉的项目核心让大型工作区依然清晰可控。'], ['03', '保持原生体验', 'SwiftUI 与 AppKit 让 macOS 体验轻盈、快速而自然。']] },
+  ja: { title: 'AI 支援開発を、いつでも理解できる状態に。', items: [['01', 'すべての変更を見る', '生成された変更を文脈とともに確認できます。'], ['02', '迷わずナビゲート', '馴染みのあるプロジェクト構造で大規模な作業も扱えます。'], ['03', 'ネイティブで動く', 'SwiftUI と AppKit による軽快な macOS 体験を提供します。']] },
+  ko: { title: 'AI 지원 개발을 언제나 이해할 수 있게.', items: [['01', '모든 변경 확인', '생성된 수정 사항을 맥락과 함께 검토할 수 있습니다.'], ['02', '자신 있게 탐색', '익숙한 프로젝트 구조로 큰 작업 공간도 쉽게 다룹니다.'], ['03', '네이티브 경험', 'SwiftUI와 AppKit으로 가볍고 빠른 macOS 경험을 제공합니다.']] },
+}[lang];
+---
+<section class="product-statement" id="product" aria-labelledby={`statement-title-${lang}`}>
+  <div class="shell"><h2 id={`statement-title-${lang}`}>{copy.title}</h2><div class="statement-grid">{copy.items.map(([, title, body]) => <article><h3>{title}</h3><p>{body}</p></article>)}</div></div>
+</section>

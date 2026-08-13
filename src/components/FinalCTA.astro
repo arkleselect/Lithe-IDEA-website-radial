@@ -1,0 +1,7 @@
+---
+import { site } from '../data/site';
+interface Props { lang?: 'en' | 'zh' | 'ja' | 'ko'; }
+const { lang = 'en' } = Astro.props;
+const copy = { en: ['Ready to see every line?', 'Download Lithe and experience a lighter native IDE.', 'Download for Free'], zh: ['准备好看见每一行了吗？', '下载 Lithe，体验更轻盈的原生 IDE。', '免费下载'], ja: ['すべての行を見届ける準備はできましたか？', 'Lithe をダウンロードして、軽快なネイティブ IDE を体験しましょう。', '無料でダウンロード'], ko: ['모든 줄을 볼 준비가 되었나요?', 'Lithe를 다운로드하고 더 가벼운 네이티브 IDE를 경험하세요.', '무료 다운로드'] }[lang];
+---
+<section class="final-cta" id="download" aria-labelledby={`final-cta-title-${lang}`}><div class="shell final-cta-inner"><p class="section-kicker">LITHE</p><h2 id={`final-cta-title-${lang}`}>{copy[0]}</h2><p>{copy[1]}</p><div class="final-cta-actions"><a class="button button-primary" href={site.release} target="_blank" rel="noreferrer">{copy[2]} <span aria-hidden="true">↗</span></a><a class="button button-secondary" href={site.repository} target="_blank" rel="noreferrer">GitHub</a></div></div></section>

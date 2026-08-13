@@ -76,10 +76,37 @@ h1, h2, h3, p { margin-top: 0; } h1, h2, h3 { letter-spacing: 0; }
 .hero-code-line { display: grid; grid-template-columns: 30px minmax(0, 1fr); column-gap: 15px; min-height: 28px; color: rgba(170,183,204,.82); font: 400 16px/1.72 'IBM Plex Mono', monospace; white-space: pre; }
 .hero-code-line-number { color: rgba(160,174,198,.62); text-align: right; user-select: none; }.hero-code-line code { color: inherit; font: inherit; }.swift-attribute, .swift-keyword { color: rgba(157,142,235,.92); }.swift-type { color: rgba(187,198,225,.95); }.swift-function { color: rgba(172,190,216,.9); }
 .home-content-stage { position: relative; z-index: 2; min-height: 560px; padding-top: 1px; background: #000; perspective: 1200px; }
-.hero-product-preview { position: relative; width: min(calc(100% - 48px), 920px); margin: -110px auto 0; opacity: var(--preview-progress, 0); transform: translate3d(0, var(--preview-scroll-y, 150px), 0) rotateX(var(--preview-rotate-x, 17deg)) scale(var(--preview-scale, .93)); transform-origin: 50% 100%; will-change: transform, opacity; }
+.hero-product-preview { position: relative; width: min(calc(100% - 48px), 920px); margin: -110px auto 0; opacity: calc(var(--preview-progress, 0) * var(--preview-visibility, 0)); transform: translate3d(0, var(--preview-scroll-y, 150px), 0) rotateX(var(--preview-rotate-x, 17deg)) scale(var(--preview-scale, .93)); transform-origin: 50% 100%; will-change: transform, opacity; }
 .interactive-app-slot { opacity: 1; }
 .hero-product-preview img { width: 100%; height: auto; border: 0; border-radius: 10px; box-shadow: 0 24px 72px rgba(0,0,0,.62), 0 10px 32px rgba(24,12,64,.22); }
 .signal-band { position: relative; z-index: 0; }
+.product-statement { padding-block: clamp(100px, 13vw, 176px); background: #000; color: #f2f2f5; }.product-statement h2 { max-width: 16ch; margin: 0 0 clamp(54px, 7vw, 86px); font-size: clamp(34px, 4.5vw, 64px); line-height: 1.05; font-weight: 500; letter-spacing: -.035em; }.statement-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 5vw, 72px); }.statement-grid article { padding-top: 17px; border-top: 1px solid rgba(225,218,255,.14); }.statement-grid article > span { color: #8d7bea; font: 12px 'IBM Plex Mono', monospace; }.statement-grid h3 { margin: 22px 0 10px; font-size: 17px; font-weight: 550; }.statement-grid p { max-width: 27ch; margin: 0; color: #858994; font-size: 13px; line-height: 1.65; }
+.feature-rail { padding-block: clamp(104px, 13vw, 176px); color: #f2f2f5; }.feature-rail h2 { max-width: 15ch; margin: 0 0 clamp(42px, 6vw, 68px); font-size: clamp(34px, 4.2vw, 58px); line-height: 1.06; font-weight: 500; letter-spacing: -.035em; }.feature-rail-list { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid rgba(225,218,255,.14); }.feature-rail-list a { position: relative; min-height: 150px; display: flex; flex-direction: column; gap: 10px; padding: 20px 18px 18px 0; border-bottom: 1px solid rgba(225,218,255,.14); color: inherit; text-decoration: none; }.feature-rail-list a + a { padding-left: 18px; border-left: 1px solid rgba(225,218,255,.1); }.feature-rail-list strong { font-size: 15px; font-weight: 550; }.feature-rail-list span { max-width: 18ch; color: #858994; font-size: 12px; line-height: 1.55; }.feature-rail-list i { margin-top: auto; color: #777b86; font-size: 17px; font-style: normal; }.feature-rail-list a:hover i { color: #d5d7dc; }
+.final-cta { position: relative; overflow: hidden; padding-block: clamp(104px, 12vw, 156px); background: #050507; color: #f2f2f5; text-align: center; }.final-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 110%, rgba(83,61,174,.24), transparent 63%); pointer-events: none; }.final-cta-inner { position: relative; }.final-cta .section-kicker { color: #a99bf0; }.final-cta h2 { margin: 0 auto 15px; font-size: clamp(34px, 4.4vw, 58px); line-height: 1.05; font-weight: 500; letter-spacing: -.035em; }.final-cta-inner > p:not(.section-kicker) { margin: 0 auto 28px; color: #858994; font-size: 15px; }.final-cta-actions { display: flex; justify-content: center; gap: 10px; }.final-cta-actions .button { min-width: 154px; }
+@media (max-width: 800px) { .statement-grid { grid-template-columns: 1fr; gap: 30px; }.statement-grid p { max-width: 42ch; }.feature-rail-list { grid-template-columns: repeat(2, 1fr); }.feature-rail-list a:nth-child(3) { border-left: 0; padding-left: 0; }.feature-rail-list a:nth-child(n+3) { border-top: 1px solid rgba(225,218,255,.1); } }
+@media (max-width: 640px) { .product-statement, .feature-rail, .final-cta { padding-block: 82px 104px; }.product-statement h2, .feature-rail h2 { font-size: 36px; }.feature-rail-list { grid-template-columns: 1fr; }.feature-rail-list a, .feature-rail-list a + a { min-height: 112px; padding: 16px 0; border-left: 0; border-top: 1px solid rgba(225,218,255,.1); }.feature-rail-list a:first-child { border-top: 0; }.final-cta-actions { flex-wrap: wrap; }.final-cta-actions .button { min-width: 140px; } }
+
+/* Shared vertical rhythm for the main content chapters. */
+.product-statement,
+.feature-rail,
+.sponsors-section,
+.faq-section,
+.final-cta { padding-block: clamp(96px, 12vw, 168px); }
+.product-statement h2,
+.feature-rail h2 { margin-bottom: 64px; }
+.faq-centered-heading,
+.sponsors-heading { margin-bottom: 56px; }
+@media (max-width: 640px) {
+  .product-statement,
+  .feature-rail,
+  .sponsors-section,
+  .faq-section,
+  .final-cta { padding-block: 80px; }
+  .product-statement h2,
+  .feature-rail h2 { margin-bottom: 44px; }
+  .faq-centered-heading,
+  .sponsors-heading { margin-bottom: 40px; }
+}
 @media (max-width: 900px) { .product-demo-layout { grid-template-columns: minmax(0, 1fr); min-height: 0; margin-top: 160px; }.interactive-app-slot { display: none; }.hero-code-layer { width: min(100%, 560px); }.hero-code-line { font-size: 14px; } }
 @media (max-width: 640px) { .hero-dark { min-height: max(620px, calc(88svh - 64px)); }.home-content-stage { min-height: 520px; }.hero-product-preview { width: calc(100% - 24px); margin-top: -52px; }.hero-product-preview img { border-radius: 8px; }.product-demo-layout { width: calc(100% - 32px); margin-top: 88px; }.hero-code-layer { padding-bottom: 96px; overflow: hidden; }.hero-code-line { grid-template-columns: 24px minmax(0, 1fr); column-gap: 10px; font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { .hero-background, .hero-code-layer { animation: none; transform: none; transition: none; }.hero-code-layer { opacity: .2; }.hero-product-preview { opacity: 1; transform: none; }.product-story-step { opacity: 1; transform: none; }.product-story-step .hero-code-layer { opacity: .24; }.product-story-step .hero-code-line { opacity: 1; transform: none; } }
