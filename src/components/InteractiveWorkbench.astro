@@ -1,0 +1,333 @@
+<div class="workbench-demo" data-workbench-demo>
+  <div class="workbench-topbar">
+    <div class="workbench-project"><img src="/assets/lithe-icon.png" width="22" height="22" alt="" /><span>Lithe-Demo</span><span class="workbench-chevron" aria-hidden="true"></span></div>
+    <div class="workbench-run"><svg class="workbench-leaf" aria-hidden="true" viewBox="0 0 16 16"><path d="M13.2 2.7C9.2 2.6 5.1 4.6 3.8 8.2c-.8 2.2.2 4.4 2.4 5.1 2.7.8 5.3-1.2 6.2-3.8.7-2 .6-4.4.8-6.8Z"/><path d="M3.1 13.8c1.5-2.4 3.7-4.7 7.2-7.1"/></svg><span>Lithe-Demo</span><span class="workbench-chevron" aria-hidden="true"></span><button type="button" aria-label="Run demo"><img src="/assets/lithe-icons/execute.svg" alt="" /></button><button type="button" aria-label="Search demo"><img src="/assets/lithe-icons/search.svg" alt="" /></button><button type="button" aria-label="More actions"><img src="/assets/lithe-icons/more.svg" alt="" /></button></div>
+  </div>
+
+  <div class="workbench-main">
+    <aside class="workbench-activity" aria-label="Tool windows">
+      <div class="activity-primary-tools">
+        <button class="is-active" type="button" aria-label="Project" data-tool="project"><img src="/assets/lithe-icons/toolwindow-project.svg" alt="" /></button>
+        <button type="button" aria-label="Changes" data-tool="changes"><img src="/assets/lithe-icons/toolwindow-commit.svg" alt="" /></button>
+        <button type="button" aria-label="Search" data-tool="search"><img src="/assets/lithe-icons/toolwindow-find.svg" alt="" /></button>
+      </div>
+      <span class="activity-spacer"></span>
+      <button type="button" aria-label="Terminal" data-tool="terminal"><svg class="sf-terminal-icon" aria-hidden="true" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="m4 6 2 2-2 2M8 10h3.5"/></svg></button>
+      <button type="button" aria-label="Version control" data-tool="vcs"><img src="/assets/lithe-icons/toolwindow-vcs.svg" alt="" /></button>
+      <button type="button" aria-label="Settings" data-tool="settings"><img src="/assets/lithe-icons/gear.svg" alt="" /></button>
+    </aside>
+
+    <aside class="workbench-tree" aria-label="Demo project files">
+      <div class="tool-panel" data-tool-panel="project">
+        <div class="tree-header"><strong>Project</strong><span class="tree-header-chevron" aria-hidden="true"></span><button type="button" aria-label="Refresh project"><img src="/assets/lithe-icons/refresh.svg" alt="" /></button></div>
+        <div class="tree-list">
+        <button class="tree-row tree-folder-row" type="button" data-folder="sources" aria-expanded="true"><span class="tree-disclosure" aria-hidden="true"></span><img class="tree-node-icon" src="/assets/lithe-icons/folder.svg" alt="" /><span>Sources</span></button>
+        <div class="tree-children" data-folder-children="sources">
+          <button class="tree-row tree-folder-row" type="button" data-folder="app" aria-expanded="true"><span class="tree-disclosure" aria-hidden="true"></span><img class="tree-node-icon" src="/assets/lithe-icons/folder.svg" alt="" /><span>LitheDemo</span></button>
+          <div class="tree-children tree-depth-2" data-folder-children="app">
+            <button class="tree-row tree-file-row is-selected" type="button" data-file="WorkspaceModel.swift"><img class="tree-node-icon" src="/assets/lithe-icons/swift.svg" alt="" /><span>WorkspaceModel.swift</span></button>
+            <button class="tree-row tree-file-row" type="button" data-file="WorkbenchView.swift"><img class="tree-node-icon" src="/assets/lithe-icons/swift.svg" alt="" /><span>WorkbenchView.swift</span></button>
+            <button class="tree-row tree-file-row" type="button" data-file="ProjectIndex.swift"><img class="tree-node-icon" src="/assets/lithe-icons/swift.svg" alt="" /><span>ProjectIndex.swift</span></button>
+          </div>
+        </div>
+        <button class="tree-row tree-folder-row" type="button" data-folder="tests" aria-expanded="false"><span class="tree-disclosure" aria-hidden="true"></span><img class="tree-node-icon" src="/assets/lithe-icons/folder.svg" alt="" /><span>Tests</span></button>
+        <div class="tree-children" data-folder-children="tests" hidden>
+          <button class="tree-row tree-file-row" type="button" data-file="WorkspaceModelTests.swift"><img class="tree-node-icon" src="/assets/lithe-icons/swift.svg" alt="" /><span>WorkspaceModelTests.swift</span></button>
+        </div>
+        <button class="tree-row tree-file-row" type="button" data-file="Package.swift"><img class="tree-node-icon" src="/assets/lithe-icons/swift.svg" alt="" /><span>Package.swift</span></button>
+        <button class="tree-row tree-file-row" type="button" data-file="README.md"><img class="tree-node-icon" src="/assets/lithe-icons/markdown.svg" alt="" /><span>README.md</span></button>
+        </div>
+      </div>
+
+      <div class="tool-panel" data-tool-panel="changes" hidden>
+        <div class="tree-header"><strong>Changes</strong><span class="panel-count">3</span></div>
+        <div class="tool-panel-body">
+          <p class="tool-section-label">Default Changelist</p>
+          <button class="tool-result-row" type="button" data-file="WorkspaceModel.swift"><img src="/assets/lithe-icons/swift.svg" alt="" /><span>WorkspaceModel.swift</span><small>M</small></button>
+          <button class="tool-result-row" type="button" data-file="WorkbenchView.swift"><img src="/assets/lithe-icons/swift.svg" alt="" /><span>WorkbenchView.swift</span><small>M</small></button>
+          <button class="tool-result-row" type="button" data-file="ProjectIndex.swift"><img src="/assets/lithe-icons/swift.svg" alt="" /><span>ProjectIndex.swift</span><small>A</small></button>
+        </div>
+      </div>
+
+      <div class="tool-panel" data-tool-panel="search" hidden>
+        <div class="tree-header"><strong>Search</strong></div>
+        <div class="tool-panel-body">
+          <label class="demo-search-field"><img src="/assets/lithe-icons/search.svg" alt="" /><input value="Workspace" aria-label="Search project" data-demo-search /></label>
+          <p class="tool-section-label" data-search-summary></p>
+          <div class="search-results" data-search-results></div>
+        </div>
+      </div>
+
+      <div class="tool-panel" data-tool-panel="vcs" hidden>
+        <div class="tree-header"><strong>Git</strong><img class="tree-header-icon" src="/assets/lithe-icons/refresh.svg" alt="" /></div>
+        <div class="tool-panel-body">
+          <p class="current-branch"><img src="/assets/lithe-icons/toolwindow-vcs.svg" alt="" /><span>main</span></p>
+          <p class="tool-section-label">Recent commits</p>
+          <button class="commit-row" type="button"><span class="commit-dot"></span><span><strong>Refine project indexing</strong><small>2 minutes ago</small></span></button>
+          <button class="commit-row" type="button"><span class="commit-dot"></span><span><strong>Add editor session</strong><small>Yesterday</small></span></button>
+          <button class="commit-row" type="button"><span class="commit-dot"></span><span><strong>Initial workspace</strong><small>3 days ago</small></span></button>
+        </div>
+      </div>
+
+      <div class="tool-panel" data-tool-panel="settings" hidden>
+        <div class="tree-header"><strong>Settings</strong></div>
+        <div class="tool-panel-body settings-demo">
+          <button class="settings-row" type="button" data-setting="editor" aria-expanded="false"><span>Editor</span><small>›</small></button>
+          <div class="settings-detail" data-setting-detail="editor" hidden><label><span>Font size</span><select aria-label="Editor font size"><option>13 px</option><option selected>14 px</option><option>15 px</option></select></label><label><span>Line numbers</span><input type="checkbox" checked /></label></div>
+          <button class="settings-row" type="button" data-setting="appearance" aria-expanded="false"><span>Appearance</span><small>›</small></button>
+          <div class="settings-detail" data-setting-detail="appearance" hidden><label><span>Theme</span><select aria-label="Theme"><option selected>Lithe Dark</option><option>System</option></select></label></div>
+          <button class="settings-row" type="button" data-setting="terminal" aria-expanded="false"><span>Terminal</span><small>›</small></button>
+          <div class="settings-detail" data-setting-detail="terminal" hidden><label><span>Shell</span><select aria-label="Terminal shell"><option selected>zsh</option><option>bash</option></select></label></div>
+          <button class="settings-row" type="button" data-setting="ai" aria-expanded="false"><span>AI & Commit</span><small>›</small></button>
+          <div class="settings-detail" data-setting-detail="ai" hidden><label><span>AI review</span><input type="checkbox" checked /></label><label><span>Commit summary</span><input type="checkbox" checked /></label></div>
+          <button class="settings-row" type="button" data-setting="updates" aria-expanded="false"><span>Updates</span><small>›</small></button>
+          <div class="settings-detail" data-setting-detail="updates" hidden><label><span>Channel</span><select aria-label="Update channel"><option selected>Stable</option><option>Preview</option></select></label></div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="workbench-editor" aria-label="Demo code editor">
+      <div class="editor-tabs" data-editor-tabs></div>
+      <div class="editor-code" data-editor-code></div>
+      <div class="editor-terminal" data-editor-terminal hidden>
+        <div class="editor-terminal-header"><strong>Terminal</strong><span>zsh</span><button type="button" aria-label="Close terminal" data-close-terminal>×</button></div>
+        <div class="terminal-demo"><p><span class="terminal-prompt">lithe-demo %</span> swift test</p><p>Building for debugging...</p><p>Test run started.</p><p class="terminal-success">Executed 8 tests, 0 failures</p><p><span class="terminal-prompt">lithe-demo %</span><span class="terminal-caret"></span></p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="workbench-status"><span>Sources</span><span>›</span><span>LitheDemo</span><span>›</span><strong data-status-file>WorkspaceModel.swift</strong><span class="status-spacer"></span><span>UTF-8</span><span>4 spaces</span><span>Swift 6.2</span></div>
+</div>
+
+<script>
+  type DemoCodeLine = [kind: string, line: string];
+  const demoFiles: Record<string, DemoCodeLine[]> = {
+    'WorkspaceModel.swift': [
+      ['kw', '@MainActor'],
+      ['plain', 'final class WorkspaceModel: ObservableObject {'],
+      ['plain', '    @Published private(set) var files: [ProjectFile] = []'],
+      ['plain', '    @Published var selectedFile: ProjectFile?'],
+      ['plain', ''],
+      ['plain', '    private let project: ProjectIndex'],
+      ['plain', ''],
+      ['plain', '    func open(_ file: ProjectFile) async {'],
+      ['plain', '        selectedFile = file'],
+      ['plain', '        await project.index(file)'],
+      ['plain', '    }'],
+      ['plain', ''],
+      ['plain', '    func refresh() async throws {'],
+      ['plain', '        files = try await project.files()'],
+      ['plain', '    }'],
+      ['plain', '}'],
+    ],
+    'WorkbenchView.swift': [
+      ['kw', 'import SwiftUI'],
+      ['plain', ''],
+      ['plain', 'struct WorkbenchView: View {'],
+      ['plain', '    @EnvironmentObject private var model: AppModel'],
+      ['plain', ''],
+      ['plain', '    var body: some View {'],
+      ['plain', '        HStack(spacing: 0) {'],
+      ['plain', '            ProjectSidebarView()'],
+      ['plain', '            EditorAreaView()'],
+      ['plain', '        }'],
+      ['plain', '        .background(LitheTheme.window)'],
+      ['plain', '    }'],
+      ['plain', '}'],
+    ],
+    'ProjectIndex.swift': [
+      ['kw', 'protocol ProjectIndex: Sendable {'],
+      ['plain', '    func files() async throws -> [ProjectFile]'],
+      ['plain', '    func index(_ file: ProjectFile) async'],
+      ['plain', '}'],
+      ['plain', ''],
+      ['plain', 'struct ProjectFile: Identifiable, Hashable {'],
+      ['plain', '    let id: UUID'],
+      ['plain', '    let path: String'],
+      ['plain', '    let language: Language'],
+      ['plain', '}'],
+    ],
+    'WorkspaceModelTests.swift': [
+      ['kw', 'import Testing'],
+      ['plain', '@testable import LitheDemo'],
+      ['plain', ''],
+      ['plain', '@Test func opensSelectedFile() async throws {'],
+      ['plain', '    let project = DemoProjectIndex()'],
+      ['plain', '    let model = WorkspaceModel(project: project)'],
+      ['plain', ''],
+      ['plain', '    await model.open(project.files[0])'],
+      ['plain', '    #expect(model.selectedFile != nil)'],
+      ['plain', '}'],
+    ],
+    'Package.swift': [
+      ['comment', '// swift-tools-version: 6.2'],
+      ['kw', 'import PackageDescription'],
+      ['plain', ''],
+      ['plain', 'let package = Package('],
+      ['plain', '    name: "LitheDemo",'],
+      ['plain', '    platforms: [.macOS(.v13)],'],
+      ['plain', '    products: [.executable(name: "LitheDemo", targets: ["LitheDemo"])],'],
+      ['plain', '    targets: [.executableTarget(name: "LitheDemo")]'],
+      ['plain', ')'],
+    ],
+    'README.md': [
+      ['heading', '# Lithe Demo'],
+      ['plain', ''],
+      ['plain', 'A small native workspace used by the website demo.'],
+      ['plain', ''],
+      ['heading', '## Features'],
+      ['plain', '- Native project navigation'],
+      ['plain', '- Fast editor tabs'],
+      ['plain', '- Swift 6.2 concurrency'],
+    ],
+  };
+
+  const escapeDemoCode = (value: string) => value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replace(/(&quot;|"[^"\n]*")/g, '<span class="token-string">$1</span>')
+    .replace(/\b(final|class|struct|protocol|private|var|let|func|async|await|throws|try|import|return)\b/g, '<span class="token-keyword">$1</span>')
+    .replace(/\b(View|ObservableObject|ProjectFile|ProjectIndex|AppModel|UUID|String|Language|Sendable)\b/g, '<span class="token-type">$1</span>');
+
+  document.querySelectorAll<HTMLElement>('[data-workbench-demo]').forEach((demo) => {
+    const tabsElement = demo.querySelector<HTMLElement>('[data-editor-tabs]');
+    const codeElement = demo.querySelector<HTMLElement>('[data-editor-code]');
+    const statusFile = demo.querySelector<HTMLElement>('[data-status-file]');
+    const searchInput = demo.querySelector<HTMLInputElement>('[data-demo-search]');
+    const searchSummary = demo.querySelector<HTMLElement>('[data-search-summary]');
+    const searchResults = demo.querySelector<HTMLElement>('[data-search-results]');
+    const terminal = demo.querySelector<HTMLElement>('[data-editor-terminal]');
+    const editor = demo.querySelector<HTMLElement>('.workbench-editor');
+    let openFiles = ['WorkspaceModel.swift', 'WorkbenchView.swift'];
+    let activeFile = 'WorkspaceModel.swift';
+    let activeSearchResult = '';
+
+    const renderSearch = () => {
+      if (!searchInput || !searchSummary || !searchResults) return;
+      const query = searchInput.value.trim();
+      if (!query) {
+        searchSummary.textContent = 'Type to search project';
+        searchResults.innerHTML = '';
+        return;
+      }
+
+      const normalizedQuery = query.toLocaleLowerCase();
+      const matches = Object.entries(demoFiles).flatMap(([file, lines]) => {
+        const matchingLines = lines
+          .map(([, line], index) => ({ line, lineNumber: index + 1 }))
+          .filter(({ line }) => line.toLocaleLowerCase().includes(normalizedQuery));
+        if (file.toLocaleLowerCase().includes(normalizedQuery) && matchingLines.length === 0) {
+          matchingLines.push({ line: file, lineNumber: 1 });
+        }
+        return matchingLines.slice(0, 2).map((match) => ({ file, ...match }));
+      }).slice(0, 8);
+
+      const fileCount = new Set(matches.map(({ file }) => file)).size;
+      searchSummary.textContent = matches.length === 0 ? 'No results' : `${matches.length} result${matches.length === 1 ? '' : 's'} in ${fileCount} file${fileCount === 1 ? '' : 's'}`;
+      const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      searchResults.innerHTML = matches.map(({ file, line, lineNumber }) => {
+        const highlightedLine = escapeDemoCode(line).replace(new RegExp(`(${escapedQuery})`, 'ig'), '<mark>$1</mark>');
+        return `<button class="search-result" type="button" data-file="${file}" data-search-line="${lineNumber}"><strong>${file}<small>:${lineNumber}</small></strong><span>${highlightedLine}</span></button>`;
+      }).join('');
+    };
+
+    const setTerminalOpen = (open: boolean) => {
+      if (!terminal || !editor) return;
+      terminal.hidden = !open;
+      editor.classList.toggle('has-terminal', open);
+      demo.querySelector<HTMLElement>('[data-tool="terminal"]')?.classList.toggle('is-active', open);
+    };
+
+    const render = () => {
+      if (!tabsElement || !codeElement) return;
+      tabsElement.innerHTML = openFiles.map((file) => `<button class="editor-tab${file === activeFile ? ' is-active' : ''}" type="button" data-tab="${file}"><img class="tree-node-icon" src="/assets/lithe-icons/${file.endsWith('.md') ? 'markdown' : 'swift'}.svg" alt=""><span>${file}</span><span class="tab-close" data-close-tab="${file}" aria-label="Close ${file}">×</span></button>`).join('');
+      const lines = demoFiles[activeFile] ?? [];
+      codeElement.innerHTML = lines.map(([kind, line], index) => `<div class="demo-code-line" data-code-line="${index + 1}"><span class="demo-line-number">${index + 1}</span><code class="line-${kind}">${escapeDemoCode(line)}</code></div>`).join('');
+      if (statusFile) statusFile.textContent = activeFile;
+      demo.querySelectorAll<HTMLElement>('[data-file]:not([data-search-line])').forEach((row) => row.classList.toggle('is-selected', row.dataset.file === activeFile));
+      demo.querySelectorAll<HTMLElement>('[data-search-line]').forEach((row) => {
+        const resultKey = `${row.dataset.file}:${row.dataset.searchLine}`;
+        row.classList.toggle('is-selected', resultKey === activeSearchResult);
+      });
+    };
+
+    demo.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const toolButton = target.closest<HTMLElement>('[data-tool]');
+      if (toolButton) {
+        const tool = toolButton.dataset.tool;
+        if (tool === 'terminal') {
+          setTerminalOpen(terminal?.hidden ?? true);
+          return;
+        }
+        setTerminalOpen(false);
+        demo.querySelectorAll<HTMLElement>('[data-tool]').forEach((button) => button.classList.toggle('is-active', button === toolButton));
+        demo.querySelectorAll<HTMLElement>('[data-tool-panel]').forEach((panel) => { panel.hidden = panel.dataset.toolPanel !== tool; });
+        if (tool === 'search') requestAnimationFrame(() => searchInput?.focus());
+        return;
+      }
+      if (target.closest('[data-close-terminal]')) {
+        setTerminalOpen(false);
+        return;
+      }
+      const setting = target.closest<HTMLElement>('[data-setting]');
+      if (setting) {
+        const settingID = setting.dataset.setting;
+        const shouldOpen = setting.getAttribute('aria-expanded') !== 'true';
+        demo.querySelectorAll<HTMLElement>('[data-setting]').forEach((row) => {
+          const isCurrent = row === setting && shouldOpen;
+          row.setAttribute('aria-expanded', String(isCurrent));
+          row.classList.toggle('is-selected', isCurrent);
+        });
+        demo.querySelectorAll<HTMLElement>('[data-setting-detail]').forEach((detail) => {
+          detail.hidden = !shouldOpen || detail.dataset.settingDetail !== settingID;
+        });
+        return;
+      }
+      const folder = target.closest<HTMLElement>('[data-folder]');
+      if (folder) {
+        const id = folder.dataset.folder;
+        const children = demo.querySelector<HTMLElement>(`[data-folder-children="${id}"]`);
+        const expanded = folder.getAttribute('aria-expanded') === 'true';
+        folder.setAttribute('aria-expanded', String(!expanded));
+        if (children) children.hidden = expanded;
+        return;
+      }
+
+      const close = target.closest<HTMLElement>('[data-close-tab]');
+      if (close) {
+        event.stopPropagation();
+        const file = close.dataset.closeTab;
+        openFiles = openFiles.filter((item) => item !== file);
+        if (activeFile === file) activeFile = openFiles.at(-1) ?? 'WorkspaceModel.swift';
+        if (openFiles.length === 0) openFiles = [activeFile];
+        render();
+        return;
+      }
+
+      const tab = target.closest<HTMLElement>('[data-tab]');
+      const fileRow = target.closest<HTMLElement>('[data-file]');
+      const file = tab?.dataset.tab ?? fileRow?.dataset.file;
+      if (file && file in demoFiles) {
+        const searchLine = fileRow?.dataset.searchLine;
+        activeSearchResult = searchLine ? `${file}:${searchLine}` : '';
+        activeFile = file;
+        if (!openFiles.includes(file)) openFiles.push(file);
+        render();
+        if (searchLine) {
+          const targetLine = codeElement?.querySelector<HTMLElement>(`[data-code-line="${searchLine}"]`);
+          if (targetLine && codeElement) {
+            const centeredTop = targetLine.offsetTop - (codeElement.clientHeight - targetLine.offsetHeight) / 2;
+            codeElement.scrollTo({ top: Math.max(0, centeredTop), left: codeElement.scrollLeft, behavior: 'smooth' });
+          }
+          targetLine?.classList.add('is-search-target');
+        }
+      }
+    });
+
+    searchInput?.addEventListener('input', renderSearch);
+    render();
+    renderSearch();
+  });
+</script>

@@ -1,0 +1,70 @@
+---
+interface Props {
+  lang?: 'en' | 'zh' | 'ja' | 'ko';
+}
+
+const { lang = 'en' } = Astro.props;
+const copy = {
+  en: { eyebrow: '01 / REVIEW', title: 'AI changes,\nwithout losing context.', body: 'See every change side-by-side. Understand what happened, right where it happened.', file: 'WorkspaceModel.swift', changes: '3 changes', reject: 'Reject', apply: 'Apply', applied: 'Applied' },
+  zh: { eyebrow: '01 / 审阅', title: '看清 AI 改动，\n不丢失上下文。', body: '并排查看每一处改动，在代码发生变化的位置理解它。', file: 'WorkspaceModel.swift', changes: '3 处改动', reject: '拒绝', apply: '应用', applied: '已应用' },
+  ja: { eyebrow: '01 / レビュー', title: '文脈を失わず、\nAI の変更を見る。', body: 'すべての変更を並べて確認し、変更された場所でその意図を理解できます。', file: 'WorkspaceModel.swift', changes: '3 件の変更', reject: '却下', apply: '適用', applied: '適用済み' },
+  ko: { eyebrow: '01 / 검토', title: '맥락을 놓치지 않고,\nAI 변경을 확인하세요.', body: '모든 변경 사항을 나란히 보고, 변경된 바로 그 위치에서 의미를 이해하세요.', file: 'WorkspaceModel.swift', changes: '변경 3개', reject: '거부', apply: '적용', applied: '적용됨' },
+}[lang];
+---
+
+<section class="ai-review-section" aria-labelledby={`ai-review-title-${lang}`} data-ai-review>
+  <div class="ai-review-shell shell">
+    <div class="ai-review-copy">
+      <p class="ai-review-kicker">{copy.eyebrow}</p>
+      <h2 id={`ai-review-title-${lang}`}>{copy.title.split('\n').map((line, index) => <>{index > 0 && <br />}{line}</>)}</h2>
+      <p class="ai-review-body">{copy.body}</p>
+    </div>
+
+    <div class="ai-review-visual" aria-label="AI code change review demo">
+      <div class="review-context-code" aria-hidden="true">
+        <div><span>18</span><code><b>@MainActor</b></code></div>
+        <div><span>19</span><code><b>final class</b> WorkspaceModel: ObservableObject &#123;</code></div>
+        <div><span>20</span><code>    @Published private(set) var changes: [Change] = []</code></div>
+        <div><span>21</span><code>    @Published private(set) var isApplying = false</code></div>
+        <div><span>22</span><code></code></div>
+        <div><span>23</span><code>    private let project: ProjectIndex</code></div>
+        <div><span>24</span><code>    private let editor: EditorSession</code></div>
+        <div><span>25</span><code></code></div>
+        <div><span>26</span><code>    func reviewChanges() async throws &#123;</code></div>
+        <div><span>27</span><code>        changes = try await project.pendingChanges()</code></div>
+        <div><span>28</span><code>        await editor.reveal(changes)</code></div>
+      </div>
+
+      <div class="review-window" data-review-window>
+        <div class="review-app-topbar"><div class="review-app-project"><img src="/assets/lithe-icon.png" alt="" /><strong>Lithe-Demo</strong><span class="review-app-chevron"></span></div><div class="review-app-run"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M13.2 2.7C9.2 2.6 5.1 4.6 3.8 8.2c-.8 2.2.2 4.4 2.4 5.1 2.7.8 5.3-1.2 6.2-3.8.7-2 .6-4.4.8-6.8Z"/><path d="M3.1 13.8c1.5-2.4 3.7-4.7 7.2-7.1"/></svg><span>Lithe-Demo</span></div></div>
+        <div class="review-app-main">
+          <aside class="review-app-activity" aria-hidden="true"><span class="is-active"><img src="/assets/lithe-icons/toolwindow-project.svg" alt="" /></span><span><img src="/assets/lithe-icons/toolwindow-commit.svg" alt="" /></span><span><img src="/assets/lithe-icons/toolwindow-find.svg" alt="" /></span><i></i><span><img src="/assets/lithe-icons/toolwindow-vcs.svg" alt="" /></span><span><img src="/assets/lithe-icons/gear.svg" alt="" /></span></aside>
+          <aside class="review-app-tree"><div class="review-tree-header"><strong>Project</strong><span class="review-app-chevron"></span><img src="/assets/lithe-icons/refresh.svg" alt="" /></div><div class="review-tree-list"><div><span class="review-tree-disclosure is-open"></span><img src="/assets/lithe-icons/folder.svg" alt="" /><strong>Sources</strong></div><div class="review-tree-depth"><span class="review-tree-disclosure is-open"></span><img src="/assets/lithe-icons/folder.svg" alt="" /><strong>LitheDemo</strong></div><div class="review-tree-file is-active"><img src="/assets/lithe-icons/swift.svg" alt="" /><span>WorkspaceModel.swift</span></div><div class="review-tree-file"><img src="/assets/lithe-icons/swift.svg" alt="" /><span>WorkbenchView.swift</span></div><div class="review-tree-file"><img src="/assets/lithe-icons/swift.svg" alt="" /><span>ProjectIndex.swift</span></div></div></aside>
+          <div class="review-app-editor"><div class="review-editor-toolbar"><span class="review-editor-tab is-active"><img src="/assets/lithe-icons/swift.svg" alt="" />{copy.file}<small>×</small></span><span class="review-editor-status">{copy.changes}</span><button type="button" data-review-reject>{copy.reject}</button><button type="button" data-review-apply data-apply-label={copy.apply} data-applied-label={copy.applied}>{copy.apply}</button></div><div class="review-diff" data-review-diff>
+            <div class="review-pane review-pane-left"><div class="review-diff-line"><span>4</span><i></i><code><b>enum</b> ReviewScope: String &#123;</code></div><div class="review-diff-line"><span>5</span><i></i><code>    <b>case</b> all = <em>"All"</em></code></div><div class="review-diff-line is-removed"><span>6</span><i></i><code>    <b>case</b> changes = <em>"Changes"</em></code></div><div class="review-diff-line"><span>7</span><i></i><code>    <b>case</b> files = <em>"Files"</em></code></div><div class="review-collapsed"><span>⌄</span>17 unchanged lines</div><div class="review-diff-line"><span>25</span><i></i><code>    <b>func</b> applyChanges() async throws &#123;</code></div><div class="review-diff-line is-removed"><span>26</span><i></i><code>        try await project.apply(changes)</code></div><div class="review-diff-line is-removed"><span>27</span><i></i><code>        await editor.refresh()</code></div><div class="review-diff-line"><span>28</span><i></i><code>    &#125;</code></div></div>
+            <div class="review-gutter" aria-hidden="true"><svg viewBox="0 0 34 250" preserveAspectRatio="none"><path class="connector connector-red" d="M0 48 C15 48 19 72 34 72 L34 96 C19 96 15 72 0 72 Z"/><path class="connector connector-green" d="M0 72 C15 72 19 48 34 48 L34 72 C19 72 15 96 0 96 Z"/><path class="connector connector-green" d="M0 188 C15 188 19 188 34 188 L34 236 C19 236 15 212 0 212 Z"/></svg><span class="connector-arrow connector-arrow-top">↔</span><span class="connector-arrow connector-arrow-bottom">→</span></div>
+            <div class="review-pane review-pane-right"><div class="review-diff-line"><span>4</span><i></i><code><b>enum</b> ReviewScope: String &#123;</code></div><div class="review-diff-line"><span>5</span><i></i><code>    <b>case</b> all = <em>"All"</em></code></div><div class="review-diff-line"><span>6</span><i></i><code>    <b>case</b> files = <em>"Files"</em></code></div><div class="review-diff-line is-added"><span>7</span><i></i><code>    <b>case</b> changes = <em>"Changes"</em></code></div><div class="review-collapsed"><span>⌄</span>17 unchanged lines</div><div class="review-diff-line"><span>25</span><i></i><code>    <b>func</b> applyChanges() async throws &#123;</code></div><div class="review-diff-line is-added"><span>26</span><i></i><code>        let result = try await project.apply(changes)</code></div><div class="review-diff-line is-added"><span>27</span><i></i><code>        await editor.refresh(result.files)</code></div><div class="review-diff-line is-added"><span>28</span><i></i><code>        changes.removeAll()</code></div><div class="review-diff-line"><span>29</span><i></i><code>    &#125;</code></div></div>
+            <div class="review-diff-map" aria-hidden="true"><span class="map-red map-a"></span><span class="map-green map-b"></span><span class="map-red map-c"></span><span class="map-green map-d"></span></div>
+          </div></div>
+        </div>
+        <div class="review-app-status"><span>Sources</span><span>›</span><span>LitheDemo</span><span>›</span><strong>{copy.file}</strong><i></i><span>UTF-8</span><span>4 spaces</span><span>Swift 6.2</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ai-review]').forEach((section) => {
+    const diff = section.querySelector<HTMLElement>('[data-review-diff]');
+    const apply = section.querySelector<HTMLButtonElement>('[data-review-apply]');
+    const reject = section.querySelector<HTMLButtonElement>('[data-review-reject]');
+    apply?.addEventListener('click', () => {
+      const applied = diff?.classList.toggle('is-applied') ?? false;
+      apply.textContent = applied ? apply.dataset.appliedLabel ?? '' : apply.dataset.applyLabel ?? '';
+    });
+    reject?.addEventListener('click', () => {
+      diff?.classList.remove('is-applied');
+      if (apply) apply.textContent = apply.dataset.applyLabel ?? '';
+    });
+  });
+</script>

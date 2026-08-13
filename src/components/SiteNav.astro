@@ -1,25 +1,44 @@
 ---
 import { navItems, site } from '../data/site';
-const isEnglish = Astro.url.pathname.startsWith('/en');
-const localizedNavItems = isEnglish
-  ? [{ label: 'Product', href: '#product' }, { label: 'Workflow', href: '#workflow' }, { label: 'Download', href: '#download' }]
-  : navItems;
+const pathname = Astro.url.pathname;
+const locale = pathname.startsWith('/zh') ? 'zh' : pathname.startsWith('/ja') ? 'ja' : pathname.startsWith('/ko') ? 'ko' : 'en';
+const labels = {
+  en: { nav: 'Main navigation', home: 'Lithe home', menu: 'Open navigation', download: 'Download', items: ['Product', 'Workflow', 'Download'] },
+  zh: { nav: '主导航', home: 'Lithe 首页', menu: '打开导航', download: '下载', items: navItems.map((item) => item.label) },
+  ja: { nav: 'メインナビゲーション', home: 'Lithe ホーム', menu: 'ナビゲーションを開く', download: 'ダウンロード', items: ['製品', 'ワークフロー', 'ダウンロード'] },
+  ko: { nav: '주요 탐색', home: 'Lithe 홈', menu: '탐색 열기', download: '다운로드', items: ['제품', '워크플로', '다운로드'] },
+} as const;
+const copy = labels[locale];
+const localizedNavItems = ['#product', '#workflow', '#download'].map((href, index) => ({ label: copy.items[index], href }));
+const localePaths = { en: '/', zh: '/zh/', ja: '/ja/', ko: '/ko/' } as const;
+const languageOptions = [
+  { locale: 'en', label: 'EN', href: '/', lang: 'en' },
+  { locale: 'zh', label: '中文', href: '/zh/', lang: 'zh-CN' },
+  { locale: 'ja', label: '日本語', href: '/ja/', lang: 'ja' },
+  { locale: 'ko', label: '한국어', href: '/ko/', lang: 'ko' },
+] as const;
+const currentLanguage = languageOptions.find((option) => option.locale === locale) ?? languageOptions[0];
 ---
 <header class="site-header">
-  <nav class="nav shell" aria-label={isEnglish ? 'Main navigation' : '主导航'}>
-    <a class="brand" href={isEnglish ? '/en/' : '/'} aria-label={isEnglish ? 'Lithe home' : 'Lithe 首页'}>
+  <nav class="nav shell" aria-label={copy.nav}>
+    <a class="brand" href={localePaths[locale]} aria-label={copy.home}>
       <img src="/assets/lithe-icon.png" width="28" height="28" alt="" />
       <span>Lithe</span>
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
-      <span class="sr-only">{isEnglish ? 'Open navigation' : '打开导航'}</span>
+      <span class="sr-only">{copy.menu}</span>
       <span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
     <div class="nav-links" id="mobile-nav">
       {localizedNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
       <span class="nav-divider" aria-hidden="true"></span>
-      <a href={isEnglish ? '/' : '/en/'} lang={isEnglish ? 'zh-CN' : 'en'}>{isEnglish ? '中文' : 'EN'}</a>
-      <a class="nav-cta" href={site.release} target="_blank" rel="noreferrer">{isEnglish ? 'Download' : '下载'} <span aria-hidden="true">↗</span></a>
+      <details class="language-menu">
+        <summary aria-label="Language"><span lang={currentLanguage.lang}>{currentLanguage.label}</span><span class="language-chevron" aria-hidden="true"></span></summary>
+        <div class="language-options">
+          {languageOptions.map((option) => <a href={option.href} lang={option.lang} aria-current={option.locale === locale ? 'page' : undefined}>{option.label}</a>)}
+        </div>
+      </details>
+      <a class="nav-cta" href={site.release} target="_blank" rel="noreferrer">{copy.download} <span aria-hidden="true">↗</span></a>
     </div>
   </nav>
 </header>
@@ -31,5 +50,18 @@ const localizedNavItems = isEnglish
     const open = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!open));
     nav?.classList.toggle('is-open', !open);
+  });
+
+  const languageMenu = document.querySelector<HTMLDetailsElement>('.language-menu');
+  document.addEventListener('pointerdown', (event) => {
+    if (languageMenu?.open && !languageMenu.contains(event.target as Node)) {
+      languageMenu.open = false;
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && languageMenu?.open) {
+      languageMenu.open = false;
+      languageMenu.querySelector<HTMLElement>('summary')?.focus();
+    }
   });
 </script>

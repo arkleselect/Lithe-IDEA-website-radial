@@ -1,0 +1,23 @@
+---
+interface Props { lang?: 'en' | 'zh' | 'ja' | 'ko'; }
+const { lang = 'en' } = Astro.props;
+const copy = {
+  en: { eyebrow: 'SUPPORTED BY', title: 'Built with support from the community.', intro: 'Lithe is made possible by partners who help keep independent development moving.' },
+  zh: { eyebrow: '项目支持', title: '感谢社区与伙伴的支持。', intro: '感谢帮助独立开发持续前进的合作伙伴。' },
+  ja: { eyebrow: 'プロジェクト支援', title: 'コミュニティとパートナーに支えられています。', intro: '独立した開発を支えてくれるパートナーに感謝します。' },
+  ko: { eyebrow: '프로젝트 후원', title: '커뮤니티와 파트너의 지원으로 만들어집니다.', intro: '독립적인 개발을 이어갈 수 있도록 함께해 주신 파트너에게 감사드립니다.' },
+}[lang];
+const sponsors = [
+  { name: 'FastAI', href: 'https://www.fastaitoken.com/', image: '/assets/sponsors/fastai.png', alt: 'FastAI', body: { en: 'Provides large language model services and supports Lithe development.', zh: '提供大模型服务支持，并助力 Lithe 的开发。', ja: '大規模言語モデルのサービスを提供し、Lithe の開発を支援しています。', ko: '대규모 언어 모델 서비스를 제공하며 Lithe 개발을 지원합니다.' }[lang] },
+  { name: 'CodeZ', href: 'https://codezsy.com', image: '/assets/sponsors/codez.png', alt: 'CodeZ', body: { en: 'Provides GPT model routing support and supports Lithe development.', zh: '提供 GPT 系列模型的中转支持，并支持 Lithe 的开发。', ja: 'GPT モデルの中継を提供し、Lithe の開発を支援しています。', ko: 'GPT 모델 중계 지원을 제공하며 Lithe 개발을 지원합니다.' }[lang] },
+  { name: 'Code GO', href: 'https://shu26.cfd/', image: '/assets/sponsors/code-go.png', alt: 'Code GO', body: { en: 'Provides Claude model routing support and supports Lithe development.', zh: '提供 Claude 系列模型的中转支持，并支持 Lithe 的开发。', ja: 'Claude モデルの中継を提供し、Lithe の開発を支援しています。', ko: 'Claude 모델 중계 지원을 제공하며 Lithe 개발을 지원합니다.' }[lang] },
+];
+---
+<section class="sponsors-section" aria-labelledby={`sponsors-title-${lang}`}>
+  <div class="shell sponsors-shell">
+    <div class="sponsors-heading"><p class="section-kicker">{copy.eyebrow}</p><h2 id={`sponsors-title-${lang}`}>{copy.title}</h2><p>{copy.intro}</p></div>
+    <div class="sponsors-list">
+      {sponsors.map((sponsor) => <a class="sponsor-row" href={sponsor.href} target="_blank" rel="noreferrer"><span class="sponsor-logo"><img src={sponsor.image} alt={sponsor.alt} loading="lazy" /></span><span class="sponsor-copy"><strong>{sponsor.name}</strong><span>{sponsor.body}</span></span><span class="sponsor-arrow" aria-hidden="true">↗</span></a>)}
+    </div>
+  </div>
+</section>
