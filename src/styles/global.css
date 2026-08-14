@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=IBM+Plex+Mono&display=swap');
 @import './product-transition.css';
 @import './project-quotes.css';
+@import './developers.css';
 
 :root { --color-surface: #050509; --color-surface-raised: #050509; --color-ink: #f4f1ff; --color-muted: #aba4bc; --color-subtle: #7d748f; --color-line: rgba(225,218,255,.16); --color-brand: #a388ff; --color-brand-dark: #c0b0ff; --color-accent: #ff785e; --color-success: #64de99; --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --radius-sm: 4px; --radius-md: 8px; --shadow-sm: 0 2px 18px rgba(0,0,0,.28); --shadow-md: 0 20px 60px rgba(0,0,0,.5); --ease: cubic-bezier(.2,.75,.25,1); }
 * { box-sizing: border-box; }

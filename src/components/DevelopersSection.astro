@@ -1,0 +1,91 @@
+---
+interface Props {
+  lang?: 'en' | 'zh';
+}
+
+const { lang = 'en' } = Astro.props;
+const content = {
+  en: {
+    title: 'Contributors',
+    prefix: 'Built in the open by',
+    suffix: 'contributors.',
+    link: 'View contributions',
+  },
+  zh: {
+    title: '开发者',
+    prefix: '由',
+    suffix: '位贡献者共同公开构建。',
+    link: '查看贡献记录',
+  },
+} as const;
+
+const developers = [
+  { name: 'Lichenkang', login: '1lck', image: '/assets/developers/1lck.jpg', href: 'https://github.com/1lck', role: 'maintainer' },
+  { name: 'Xiaoyumuxi', login: 'xiaoyumuxi', image: '/assets/developers/xiaoyumuxi.jpg', href: 'https://github.com/xiaoyumuxi', role: 'contributor' },
+  { name: 'arkleselect', login: 'arkleselect', image: '/assets/developers/arkleselect.jpg', href: 'https://github.com/arkleselect', role: 'contributor' },
+  { name: 'muchen', login: 'Mucheen', image: '/assets/developers/mucheen.jpg', href: 'https://github.com/Mucheen', role: 'contributor' },
+  { name: 'Yager-42', login: 'Yager-42', image: '/assets/developers/yager-42.jpg', href: 'https://github.com/Yager-42', role: 'contributor' },
+  { name: '栉子', login: 'Si1ive', image: '/assets/developers/si1ive.jpg', href: 'https://github.com/Si1ive', role: 'contributor' },
+] as const;
+
+const copy = content[lang] ?? content.en;
+---
+
+<section class="developers-section" data-developers-section aria-labelledby={`developers-title-${lang}`}>
+  <div class="developers-shell">
+    <header class="developers-heading">
+      <div class="developers-title-row">
+        <h2 id={`developers-title-${lang}`}>{copy.title}</h2>
+        <span aria-hidden="true"></span>
+      </div>
+      <div class="developers-meta">
+        <p>{copy.prefix} <strong>{developers.length}</strong> {copy.suffix}</p>
+        <a class="developers-contributions-link" href="https://github.com/1lck/Lithe-IDEA/graphs/contributors" target="_blank" rel="noreferrer">
+          {copy.link} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="contributors-wall">
+      <div class="contributors-plane">
+        <div class="contributors-block">
+          {developers.map((developer) => (
+            <a
+              class="contributor-tile"
+              href={developer.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${developer.name} (@${developer.login})`}
+            >
+              <span class="contributor-avatar">
+                <img src={developer.image} width="192" height="192" alt="" loading="lazy" draggable="false" />
+              </span>
+              <span class="contributor-tooltip" aria-hidden="true">@{developer.login}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <span class="contributors-wall-mask" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+  const developersSection = document.querySelector<HTMLElement>('[data-developers-section]');
+
+  if (developersSection) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    developersSection.classList.add('is-reveal-ready');
+
+    if (reducedMotion) {
+      developersSection.classList.add('is-visible');
+    } else {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!entry?.isIntersecting) return;
+        developersSection.classList.add('is-visible');
+        observer.disconnect();
+      }, { threshold: 0.16 });
+      observer.observe(developersSection);
+    }
+  }
+</script>
