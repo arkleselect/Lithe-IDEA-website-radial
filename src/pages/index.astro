@@ -6,9 +6,8 @@ import HeroCode from '../components/HeroCode.astro';
 import InteractiveWorkbench from '../components/InteractiveWorkbench.astro';
 import SponsorsSection from '../components/SponsorsSection.astro';
 import FAQSection from '../components/FAQSection.astro';
-import ProductStatement from '../components/ProductStatement.astro';
-import FeatureRail from '../components/FeatureRail.astro';
 import FinalCTA from '../components/FinalCTA.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
 import { site } from '../data/site';
 ---
 <BaseLayout lang="en" title="Lithe" description="The IDEA-shaped core for AI-assisted development.">
@@ -24,15 +23,19 @@ import { site } from '../data/site';
       </div>
     </section>
     <div class="home-content-stage">
+      {/*
       <figure class="hero-product-preview" data-hero-preview aria-label="Lithe editor interface preview"><img src="/assets/lithe-hero-workspace.jpg" width="1890" height="1052" alt="Lithe project tree and Swift editor interface" /></figure>
+      */}
+      <div class="hero-interactive-showcase" data-hero-showcase aria-label="Interactive Lithe editor demo">
+        <InteractiveWorkbench />
+      </div>
+      <BenefitsSection lang="en" />
       <div class="product-demo-layout"><div class="product-story-steps">
           <section class="product-story-step product-story-code"><HeroCode /></section>
           <section class="product-story-step product-story-image"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe project overview" loading="lazy" /></section>
           <section class="product-story-step product-story-image"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe feature overview" loading="lazy" /></section>
-        </div><div class="interactive-app-slot"><InteractiveWorkbench /><div class="interactive-app-occluder" aria-hidden="true"></div></div></div>
+        </div></div>
     </div>
-    <ProductStatement lang="en" />
-    <FeatureRail lang="en" />
     <SponsorsSection lang="en" />
     <FAQSection lang="en" />
     <FinalCTA lang="en" />

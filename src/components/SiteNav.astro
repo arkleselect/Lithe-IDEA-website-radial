@@ -1,21 +1,17 @@
 ---
 import { navItems, site } from '../data/site';
 const pathname = Astro.url.pathname;
-const locale = pathname.startsWith('/zh') ? 'zh' : pathname.startsWith('/ja') ? 'ja' : pathname.startsWith('/ko') ? 'ko' : 'en';
+const locale = pathname.startsWith('/zh') ? 'zh' : 'en';
 const labels = {
   en: { nav: 'Main navigation', home: 'Lithe home', menu: 'Open navigation', download: 'Download', items: ['Product', 'Workflow', 'Download'] },
   zh: { nav: '主导航', home: 'Lithe 首页', menu: '打开导航', download: '下载', items: navItems.map((item) => item.label) },
-  ja: { nav: 'メインナビゲーション', home: 'Lithe ホーム', menu: 'ナビゲーションを開く', download: 'ダウンロード', items: ['製品', 'ワークフロー', 'ダウンロード'] },
-  ko: { nav: '주요 탐색', home: 'Lithe 홈', menu: '탐색 열기', download: '다운로드', items: ['제품', '워크플로', '다운로드'] },
 } as const;
 const copy = labels[locale];
 const localizedNavItems = ['#product', '#workflow', '#download'].map((href, index) => ({ label: copy.items[index], href }));
-const localePaths = { en: '/', zh: '/zh/', ja: '/ja/', ko: '/ko/' } as const;
+const localePaths = { en: '/', zh: '/zh/' } as const;
 const languageOptions = [
   { locale: 'en', label: 'EN', href: '/', lang: 'en' },
   { locale: 'zh', label: '中文', href: '/zh/', lang: 'zh-CN' },
-  { locale: 'ja', label: '日本語', href: '/ja/', lang: 'ja' },
-  { locale: 'ko', label: '한국어', href: '/ko/', lang: 'ko' },
 ] as const;
 const currentLanguage = languageOptions.find((option) => option.locale === locale) ?? languageOptions[0];
 ---

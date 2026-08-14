@@ -1,14 +1,12 @@
 ---
 interface Props {
-  lang?: 'en' | 'zh' | 'ja' | 'ko';
+  lang?: 'en' | 'zh';
 }
 
 const { lang = 'en' } = Astro.props;
 const copy = {
   en: { eyebrow: 'START WITH THE REAL THING', title: ['Make your next', 'change easier to see.'], requirements: ['macOS 13 or later', 'Apple silicon and Intel'], button: 'Download Lithe' },
   zh: { eyebrow: 'START WITH THE REAL THING', title: ['让下一次改动', '更容易被看见。'], requirements: ['macOS 13 或更高版本', '支持 Apple silicon 与 Intel'], button: '下载 Lithe' },
-  ja: { eyebrow: 'START WITH THE REAL THING', title: ['次の変更を、', 'もっと見やすく。'], requirements: ['macOS 13 以降', 'Apple silicon / Intel 対応'], button: 'Lithe をダウンロード' },
-  ko: { eyebrow: 'START WITH THE REAL THING', title: ['다음 변경을', '더 쉽게 확인하세요.'], requirements: ['macOS 13 이상', 'Apple silicon 및 Intel 지원'], button: 'Lithe 다운로드' },
 }[lang];
 ---
 

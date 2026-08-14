@@ -1,12 +1,10 @@
 ---
 import { site } from '../data/site';
 const pathname = Astro.url.pathname;
-const locale = pathname.startsWith('/zh') ? 'zh' : pathname.startsWith('/ja') ? 'ja' : pathname.startsWith('/ko') ? 'ko' : 'en';
+const locale = pathname.startsWith('/zh') ? 'zh' : 'en';
 const copy = {
   en: { home: '/', contact: 'Contact', meta: 'Native macOS IDE · Apache-2.0' },
   zh: { home: '/zh/', contact: '联系团队', meta: '原生 macOS IDE · Apache-2.0' },
-  ja: { home: '/ja/', contact: 'お問い合わせ', meta: 'ネイティブ macOS IDE · Apache-2.0' },
-  ko: { home: '/ko/', contact: '문의하기', meta: '네이티브 macOS IDE · Apache-2.0' },
 }[locale];
 ---
 <footer class="site-footer">

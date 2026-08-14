@@ -1,11 +1,9 @@
 ---
-interface Props { lang?: 'en' | 'zh' | 'ja' | 'ko'; }
+interface Props { lang?: 'en' | 'zh'; }
 const { lang = 'en' } = Astro.props;
 const copy = {
   en: { eyebrow: 'THE WORKSPACE', title: 'Everything you need, close at hand.', items: [['Code', 'Navigate, search, and edit with clarity.'], ['Run', 'Start the right project with the right tool.'], ['Debug', 'Keep context while you trace behavior.'], ['Review', 'See what changed before it ships.'], ['Terminal', 'Use the command line without leaving your flow.']] },
   zh: { eyebrow: '工作区', title: '需要的一切，都在手边。', items: [['代码', '清晰地导航、搜索和编辑。'], ['运行', '用合适的工具启动正确的项目。'], ['调试', '追踪行为时保留完整上下文。'], ['审查', '在发布前看见所有改动。'], ['终端', '无需离开工作流即可使用命令行。']] },
-  ja: { eyebrow: 'ワークスペース', title: '必要なものを、すぐそばに。', items: [['コード', '明快にナビゲート、検索、編集できます。'], ['実行', '最適なツールでプロジェクトを起動します。'], ['デバッグ', '文脈を保ったまま挙動を追跡できます。'], ['レビュー', '公開前に変更を確認できます。'], ['ターミナル', '流れを止めずにコマンドラインを使えます。']] },
-  ko: { eyebrow: '워크스페이스', title: '필요한 모든 것을 가까이에서.', items: [['코드', '명확하게 탐색하고 검색하고 편집합니다.'], ['실행', '맞는 도구로 프로젝트를 시작합니다.'], ['디버그', '맥락을 유지하며 동작을 추적합니다.'], ['리뷰', '배포 전에 변경 사항을 확인합니다.'], ['터미널', '흐름을 끊지 않고 명령줄을 사용합니다.']] },
 }[lang];
 ---
 <section class="feature-rail" id="workflow" aria-labelledby={`feature-title-${lang}`}><div class="shell"><h2 id={`feature-title-${lang}`}>{copy.title}</h2><nav class="feature-rail-list" aria-label={copy.eyebrow}>{copy.items.map(([title, body]) => <a href="#workflow"><strong>{title}</strong><span>{body}</span><i aria-hidden="true">↗</i></a>)}</nav></div></section>

@@ -6,9 +6,8 @@ import HeroCode from '../../components/HeroCode.astro';
 import InteractiveWorkbench from '../../components/InteractiveWorkbench.astro';
 import SponsorsSection from '../../components/SponsorsSection.astro';
 import FAQSection from '../../components/FAQSection.astro';
-import ProductStatement from '../../components/ProductStatement.astro';
-import FeatureRail from '../../components/FeatureRail.astro';
 import FinalCTA from '../../components/FinalCTA.astro';
+import BenefitsSection from '../../components/BenefitsSection.astro';
 import { site } from '../../data/site';
 ---
 <BaseLayout lang="zh-CN">
@@ -23,13 +22,20 @@ import { site } from '../../data/site';
         <p class="hero-meta hero-meta-centered">适用于 Apple silicon 与 Intel · SwiftUI / AppKit · Swift 6.2+</p>
       </div>
     </section>
-    <div class="home-content-stage"><figure class="hero-product-preview" data-hero-preview aria-label="Lithe 编辑器界面预览"><img src="/assets/lithe-hero-workspace.jpg" width="1890" height="1052" alt="Lithe 中的项目树与 Swift 编辑器界面" /></figure><div class="product-demo-layout"><div class="product-story-steps">
+    <div class="home-content-stage">
+      {/*
+      <figure class="hero-product-preview" data-hero-preview aria-label="Lithe 编辑器界面预览"><img src="/assets/lithe-hero-workspace.jpg" width="1890" height="1052" alt="Lithe 中的项目树与 Swift 编辑器界面" /></figure>
+      */}
+      <div class="hero-interactive-showcase" data-hero-showcase aria-label="可交互的 Lithe 编辑器演示">
+        <InteractiveWorkbench />
+      </div>
+      <BenefitsSection lang="zh" />
+      <div class="product-demo-layout"><div class="product-story-steps">
           <section class="product-story-step product-story-code"><HeroCode /></section>
           <section class="product-story-step product-story-image"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe project overview" loading="lazy" /></section>
           <section class="product-story-step product-story-image"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe feature overview" loading="lazy" /></section>
-        </div><div class="interactive-app-slot"><InteractiveWorkbench /><div class="interactive-app-occluder" aria-hidden="true"></div></div></div></div>
-    <ProductStatement lang="zh" />
-    <FeatureRail lang="zh" />
+        </div></div>
+    </div>
     <SponsorsSection lang="zh" />
     <FAQSection lang="zh" />
     <FinalCTA lang="zh" />
