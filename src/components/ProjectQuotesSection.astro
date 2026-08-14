@@ -1,0 +1,79 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  lang?: 'en' | 'zh';
+}
+
+const { lang = 'en' } = Astro.props;
+const content = {
+  en: {
+    title: 'How we build Lithe.',
+    first: 'AI assistance should make every change easier to understand—not harder to trust.',
+    second: 'Stay fast. Stay native. Keep the workflow familiar.',
+    productLabel: 'Product principle',
+    engineeringLabel: 'Engineering principle',
+    note: 'Lithe is built in the open for developers who want speed without surrendering control.',
+    link: 'Follow development',
+  },
+  zh: {
+    title: '我们如何构建 Lithe。',
+    first: 'AI 辅助应该让每一次修改更容易理解，而不是更难以信任。',
+    second: '保持轻快，保持原生，也保留熟悉的工作方式。',
+    productLabel: '产品原则',
+    engineeringLabel: '工程原则',
+    note: 'Lithe 坚持开放开发，面向追求速度、同时不愿放弃控制权的开发者。',
+    link: '关注开发进展',
+  },
+} as const;
+
+const copy = content[lang] ?? content.en;
+---
+
+<section class="project-quotes-section" data-project-quotes aria-labelledby={`project-principles-title-${lang}`}>
+  <header class="project-principles-heading">
+    <h2 id={`project-principles-title-${lang}`}>{copy.title}</h2>
+  </header>
+  <div class="project-quotes-grid">
+    <article class="project-quote-card project-quote-primary">
+      <p class="project-principle-statement">{copy.first}</p>
+      <footer class="project-quote-source">
+        <span class="project-quote-mark" aria-hidden="true"><img src="/assets/lithe-quote-logo.png" alt="" /></span>
+        <span><strong>{copy.productLabel}</strong><small>Lithe</small></span>
+      </footer>
+    </article>
+
+    <article class="project-quote-card project-quote-secondary">
+      <p class="project-principle-statement">{copy.second}</p>
+      <footer class="project-quote-source">
+        <span class="project-quote-mark" aria-hidden="true"><img src="/assets/lithe-quote-logo.png" alt="" /></span>
+        <span><strong>{copy.engineeringLabel}</strong><small>Lithe</small></span>
+      </footer>
+    </article>
+  </div>
+
+  <footer class="project-quotes-footer">
+    <p>{copy.note}</p>
+    <a href={site.repository} target="_blank" rel="noreferrer">{copy.link} <span aria-hidden="true">↗</span></a>
+  </footer>
+</section>
+
+<script>
+  const quotesSection = document.querySelector<HTMLElement>('[data-project-quotes]');
+
+  if (quotesSection) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    quotesSection.classList.add('is-reveal-ready');
+
+    if (reducedMotion) {
+      quotesSection.classList.add('is-visible');
+    } else {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!entry?.isIntersecting) return;
+        quotesSection.classList.add('is-visible');
+        observer.disconnect();
+      }, { threshold: 0.14 });
+      observer.observe(quotesSection);
+    }
+  }
+</script>

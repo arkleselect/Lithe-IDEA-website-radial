@@ -1,0 +1,101 @@
+---
+interface Props {
+  lang?: 'en' | 'zh';
+}
+
+const { lang = 'en' } = Astro.props;
+const content = {
+  en: {
+    title: ['Work with AI.', 'Keep every change', 'in sight.'],
+    description: 'Open real projects, navigate familiar structures, and understand generated edits without leaving the editor.',
+    points: [
+      {
+        title: 'Navigate real projects',
+        description: 'Open folders, files, and familiar project structures without reshaping the repository.',
+      },
+      {
+        title: 'Understand every change',
+        description: 'Inspect generated code in the context of the file and lines it changes.',
+      },
+      {
+        title: 'Work without switching tools',
+        description: 'Search, edit, review, and use the terminal from one focused workspace.',
+      },
+    ],
+  },
+  zh: {
+    title: ['与 AI 协作，', '也看清每一次修改。'],
+    description: '打开真实项目、沿用熟悉的结构，并在不离开编辑器的情况下理解 AI 生成的修改。',
+    points: [
+      {
+        title: '浏览真实项目',
+        description: '打开目录、文件与熟悉的项目结构，不必重新组织现有代码仓库。',
+      },
+      {
+        title: '理解每一次修改',
+        description: '在对应文件与代码行的上下文中检查 AI 生成的代码。',
+      },
+      {
+        title: '无需切换工具',
+        description: '在一个专注的工作区中完成搜索、编辑、审查和终端操作。',
+      },
+    ],
+  },
+} as const;
+
+const copy = content[lang] ?? content.en;
+---
+
+<section class="product-transition" data-product-transition aria-labelledby={`product-transition-title-${lang}`}>
+  <div class="product-transition-inner">
+    <div class="product-transition-copy">
+      <h2 id={`product-transition-title-${lang}`}>
+        {copy.title.map((line) => <span>{line}</span>)}
+      </h2>
+      <p class="product-transition-summary">{copy.description}</p>
+    </div>
+    <div class="product-transition-points">
+      {copy.points.map((point) => (
+        <article>
+          <h3>{point.title}</h3>
+          <p>{point.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const transitionSection = document.querySelector<HTMLElement>('[data-product-transition]');
+
+  if (transitionSection) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    transitionSection.classList.add('is-reveal-ready');
+
+    if (reducedMotion) {
+      transitionSection.classList.add('is-visible');
+    } else {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!entry?.isIntersecting) return;
+        transitionSection.classList.add('is-visible');
+        observer.disconnect();
+      }, { threshold: 0.24 });
+
+      observer.observe(transitionSection);
+
+      let transitionFrame = 0;
+      const updateTransitionDepth = () => {
+        const rect = transitionSection.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+        transitionSection.style.setProperty('--transition-depth', String(progress));
+        transitionSection.style.setProperty('--transition-glow-y', `${(progress - .5) * 28}px`);
+        transitionFrame = 0;
+      };
+      const requestTransitionDepth = () => {
+        if (!transitionFrame) transitionFrame = window.requestAnimationFrame(updateTransitionDepth);
+      };
+      window.addEventListener('scroll', requestTransitionDepth, { passive: true });
+      requestTransitionDepth();
+    }
+  }
+</script>

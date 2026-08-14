@@ -2,12 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
-import HeroCode from '../../components/HeroCode.astro';
 import InteractiveWorkbench from '../../components/InteractiveWorkbench.astro';
 import SponsorsSection from '../../components/SponsorsSection.astro';
 import FAQSection from '../../components/FAQSection.astro';
-import FinalCTA from '../../components/FinalCTA.astro';
-import BenefitsSection from '../../components/BenefitsSection.astro';
+import ProductTransitionSection from '../../components/ProductTransitionSection.astro';
+import ProjectQuotesSection from '../../components/ProjectQuotesSection.astro';
 import { site } from '../../data/site';
 ---
 <BaseLayout lang="zh-CN">
@@ -26,19 +25,17 @@ import { site } from '../../data/site';
       {/*
       <figure class="hero-product-preview" data-hero-preview aria-label="Lithe 编辑器界面预览"><img src="/assets/lithe-hero-workspace.jpg" width="1890" height="1052" alt="Lithe 中的项目树与 Swift 编辑器界面" /></figure>
       */}
-      <div class="hero-interactive-showcase" data-hero-showcase aria-label="可交互的 Lithe 编辑器演示">
+      <div class="hero-interactive-showcase" data-hero-showcase aria-label="可交互的 Lithe 编辑器演示" aria-describedby="interactive-workspace-hint-zh">
         <InteractiveWorkbench />
       </div>
-      <BenefitsSection lang="zh" />
-      <div class="product-demo-layout"><div class="product-story-steps">
-          <section class="product-story-step product-story-code"><HeroCode /></section>
-          <section class="product-story-step product-story-image"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe project overview" loading="lazy" /></section>
-          <section class="product-story-step product-story-image"><img src="/assets/lithe-hero-diff.png" width="2572" height="1404" alt="Lithe feature overview" loading="lazy" /></section>
-        </div></div>
+      <div class="hero-showcase-caption" id="interactive-workspace-hint-zh">
+        <p>点击文件、搜索项目，或尝试左侧工具栏。</p>
+      </div>
     </div>
+    <ProductTransitionSection lang="zh" />
+    <ProjectQuotesSection lang="zh" />
     <SponsorsSection lang="zh" />
     <FAQSection lang="zh" />
-    <FinalCTA lang="zh" />
   </main>
   <SiteFooter />
 </BaseLayout>

@@ -51,8 +51,8 @@ const { title = site.name, description = site.description, lang = 'en' } = Astro
           hero.style.setProperty('--glow-scroll-y', `${progress * -10}px`);
           preview?.style.setProperty('--preview-progress', String(previewProgress));
           preview?.style.setProperty('--preview-scroll-y', `${(1 - previewProgress) * 100}px`);
-          preview?.style.setProperty('--preview-rotate-x', '0deg');
-          preview?.style.setProperty('--preview-scale', '1');
+          preview?.style.setProperty('--preview-rotate-x', `${(1 - previewProgress) * 9}deg`);
+          preview?.style.setProperty('--preview-scale', String(.965 + previewProgress * .035));
           if (preview) {
             const previewRect = preview.getBoundingClientRect();
             const enter = Math.max(0, Math.min(1, (window.innerHeight * .92 - previewRect.top) / Math.max(window.innerHeight * .58, 1)));

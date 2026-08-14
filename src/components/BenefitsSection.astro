@@ -5,111 +5,50 @@ interface Props {
 
 const { lang = 'en' } = Astro.props;
 const content = {
-  en: [
-    ['Native foundation', 'Built with SwiftUI and AppKit to feel fast, focused, and at home on macOS.'],
-    ['Reviewable AI', 'Generated edits stay visible and contextual before they become part of your codebase.'],
-    ['Familiar workflow', 'Projects, files, tabs, search, Git, and the terminal remain exactly where you expect.'],
-  ],
-  zh: [
-    ['原生基础', '使用 SwiftUI 与 AppKit 构建，在 macOS 上保持轻快、专注且自然。'],
-    ['可审查的 AI', '生成的修改始终保持可见并附带上下文，再由你决定是否进入代码库。'],
-    ['熟悉的工作流', '项目、文件、标签页、搜索、Git 与终端，都保留在熟悉的位置。'],
-  ],
+  en: {
+    title: 'Built to keep you in control.',
+    description: 'Native performance, reviewable AI, and familiar tools come together in one focused macOS workspace.',
+    items: [
+      ['Native foundation', 'SwiftUI and AppKit keep the workspace fast, focused, and at home on macOS.', ''],
+      ['See every change', 'Generated edits remain visible and contextual before they become part of your codebase.', '/assets/lithe-hero-diff.png'],
+      ['Keep structure in reach', 'Move through large project trees without losing the file or task in front of you.', '/assets/lithe-hero-project.png'],
+      ['Stay focused in code', 'A restrained editor surface keeps syntax, files, and active work easy to read.', '/assets/lithe-hero-editor.png'],
+      ['Tools where you expect', 'Search, Git, changes, and the terminal stay close without crowding the editor.', '/assets/lithe-hero-diff.png'],
+    ],
+  },
+  zh: {
+    title: '从始至终，控制权都在你手中。',
+    description: '原生性能、可审查的 AI 与熟悉的工具，共同构成一个专注的 macOS 开发空间。',
+    items: [
+      ['原生基础', 'SwiftUI 与 AppKit 让工作空间在 macOS 上保持轻快、专注且自然。', ''],
+      ['看见每一处修改', '生成的修改始终保持可见并附带上下文，再由你决定是否进入代码库。', '/assets/lithe-hero-diff.png'],
+      ['项目结构触手可及', '在大型目录树中移动，同时始终掌握当前文件和正在处理的任务。', '/assets/lithe-hero-project.png'],
+      ['专注于代码本身', '克制的编辑界面让语法、文件和当前工作始终清晰易读。', '/assets/lithe-hero-editor.png'],
+      ['工具都在熟悉的位置', '搜索、Git、变更和终端随手可用，同时不会挤占编辑空间。', '/assets/lithe-hero-diff.png'],
+    ],
+  },
 } as const;
 
-const items = content[lang] ?? content.en;
+const sectionContent = content[lang] ?? content.en;
+const headingId = `benefits-title-${lang}`;
 ---
 
-<section class="benefits-section" aria-label="Lithe product principles">
+<section class="benefits-section" aria-labelledby={headingId}>
+  <header class="benefits-heading">
+    <h2 id={headingId}>{sectionContent.title}</h2>
+    <p class="benefits-description">{sectionContent.description}</p>
+  </header>
   <div class="benefits-grid">
-    <article class="benefit-item">
-      <div class="benefit-illustration" aria-hidden="true">
-        <svg viewBox="0 0 280 250" role="img">
-          <g class="line-muted">
-            <path d="m34 172 98 49a18 18 0 0 0 16 0l98-49" />
-            <path d="m34 154 98 49a18 18 0 0 0 16 0l98-49" />
-            <path d="m34 136 98 49a18 18 0 0 0 16 0l98-49" />
-          </g>
-          <path class="line-bright surface" d="M239 92a7 7 0 0 1 4 6v55a7 7 0 0 1-4 6l-91 46a18 18 0 0 1-16 0l-91-46a7 7 0 0 1-4-6V98a7 7 0 0 1 4-6l91-46a18 18 0 0 1 16 0z" />
-          <path class="line-bright surface-raised" d="M239 66a7 7 0 0 1 4 6v12a7 7 0 0 1-4 6l-91 46a18 18 0 0 1-16 0L41 90a7 7 0 0 1-4-6V72a7 7 0 0 1 4-6l91-46a18 18 0 0 1 16 0z" />
-          <path class="line-muted" d="m51 73 81 40a18 18 0 0 0 16 0l81-40M91 70h98M104 83h72M120 96h40" />
-        </svg>
-      </div>
-      <div class="benefit-copy"><h3>{items[0][0]}</h3><p>{items[0][1]}</p></div>
-    </article>
-
-    <article class="benefit-item">
-      <div class="benefit-illustration" aria-hidden="true">
-        <svg viewBox="0 0 280 250" role="img">
-          <g class="line-muted connection-lines">
-            <path d="M140 54v49M79 91l39 26M201 91l-39 26M79 170l39-26M201 170l-39-26M140 152v48" />
-          </g>
-          <g class="surface line-bright">
-            <rect x="111" y="103" width="58" height="48" rx="7" />
-            <rect x="51" y="60" width="56" height="42" rx="7" />
-            <rect x="173" y="60" width="56" height="42" rx="7" />
-            <rect x="51" y="158" width="56" height="42" rx="7" />
-            <rect x="173" y="158" width="56" height="42" rx="7" />
-          </g>
-          <g class="node-marks">
-            <path d="M126 122h28M126 132h20" />
-            <circle cx="79" cy="81" r="8" /><circle cx="201" cy="81" r="8" />
-            <circle cx="79" cy="179" r="8" /><circle cx="201" cy="179" r="8" />
-          </g>
-        </svg>
-      </div>
-      <div class="benefit-copy"><h3>{items[1][0]}</h3><p>{items[1][1]}</p></div>
-    </article>
-
-    <article class="benefit-item">
-      <div class="benefit-illustration" aria-hidden="true">
-        <svg viewBox="0 0 280 250" role="img">
-          <g class="line-muted speed-lines">
-            <path d="M30 205h186M42 185h191M54 165h184M66 145h162M78 125h137" />
-          </g>
-          <g class="surface line-bright momentum-bars">
-            <path d="m53 176 113-56 42 21-113 57z" />
-            <path d="m70 148 113-56 42 21-113 57z" />
-            <path d="m87 116 113-56 42 21-113 57z" />
-            <path d="m104 80 87-43 42 21-87 44z" />
-          </g>
-          <path class="accent-line" d="m105 80 86-43 41 21" />
-        </svg>
-      </div>
-      <div class="benefit-copy"><h3>{items[2][0]}</h3><p>{items[2][1]}</p></div>
-    </article>
+    {sectionContent.items.map(([title, description, image], index) => (
+      <article class={`benefit-item benefit-item-${index + 1}`}>
+        <div class="benefit-graphic" aria-hidden="true">
+          {image && <img src={image} alt="" loading="lazy" />}
+        </div>
+        <div class="benefit-copy">
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </div>
+      </article>
+    ))}
   </div>
 </section>
-
-<style>
-  .benefits-section { width: min(calc(100% - 64px), 1200px); margin: clamp(112px, 10vw, 152px) auto 0; color: #f2f2f5; }
-  .benefits-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .benefit-item { min-width: 0; padding: 21px clamp(24px, 3vw, 42px) 34px; }
-  .benefit-item + .benefit-item { border-left: 1px solid rgba(225, 218, 255, .1); }
-  .benefit-illustration { height: 270px; display: grid; place-items: center; }
-  .benefit-illustration svg { width: min(100%, 280px); height: 250px; overflow: visible; }
-  .benefit-illustration path, .benefit-illustration rect, .benefit-illustration circle { vector-effect: non-scaling-stroke; }
-  .line-muted { fill: none; stroke: #38383f; stroke-width: .75; stroke-linecap: round; stroke-linejoin: round; }
-  .line-bright { stroke: #797a82; stroke-width: .75; stroke-linejoin: round; }
-  .surface { fill: #090a0c; }
-  .surface-raised { fill: #0d0e11; }
-  .node-marks { fill: none; stroke: #85868f; stroke-width: .75; stroke-linecap: round; }
-  .accent-line { fill: none; stroke: rgba(157, 139, 243, .8); stroke-width: 1; stroke-linecap: round; }
-  .benefit-copy { display: grid; gap: 8px; }
-  .benefit-copy h3 { margin: 0; font-size: 15px; font-weight: 550; }
-  .benefit-copy p { max-width: 34ch; margin: 0; color: #858994; font-size: 13px; line-height: 1.65; }
-  @media (max-width: 900px) {
-    .benefits-grid { grid-template-columns: 1fr; }
-    .benefit-item { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1fr); grid-template-areas: 'illustration copy'; align-items: center; gap: 0 44px; }
-    .benefit-item + .benefit-item { border-top: 1px solid rgba(225, 218, 255, .1); border-left: 0; }
-    .benefit-illustration { grid-area: illustration; }
-    .benefit-copy { grid-area: copy; }
-  }
-  @media (max-width: 640px) {
-    .benefits-section { width: calc(100% - 32px); margin-top: 80px; }
-    .benefit-item { display: block; padding: 18px 0 30px; }
-    .benefit-illustration { height: 230px; }
-    .benefit-illustration svg { height: 220px; }
-    .benefit-copy p { max-width: 42ch; }
-  }
-</style>

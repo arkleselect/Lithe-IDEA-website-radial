@@ -1,0 +1,159 @@
+.product-transition {
+  position: relative;
+  z-index: 1;
+  width: min(calc(100% - 64px), 1200px);
+  margin: clamp(96px, 8vw, 128px) auto 0;
+  color: #f2f2f5;
+  isolation: isolate;
+}
+
+.product-transition::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: min(150vw, 1800px);
+  height: clamp(520px, 58vw, 760px);
+  background: radial-gradient(ellipse at 50% 48%, rgba(86, 63, 164, .12), rgba(35, 25, 68, .04) 38%, transparent 72%);
+  opacity: calc(.48 + var(--transition-depth, 0) * .28);
+  transform: translate3d(-50%, calc(-50% + var(--transition-glow-y, 0px)), 0);
+  pointer-events: none;
+}
+
+.product-transition-inner {
+  width: 100%;
+}
+
+.product-transition-copy {
+  max-width: 780px;
+}
+
+.product-transition h2 {
+  max-width: 15ch;
+  margin: 0;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.product-transition h2 span {
+  display: block;
+}
+
+.product-transition-summary {
+  max-width: 610px;
+  margin: 24px 0 0;
+  color: #858994;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.product-transition-points {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 48px);
+  margin: clamp(52px, 6vw, 72px) auto 0;
+}
+
+.product-transition-points article {
+  min-width: 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(225, 218, 255, .14);
+}
+
+.product-transition-points h3 {
+  margin: 0;
+  color: #e7e7eb;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.product-transition-points p {
+  margin: 10px 0 0;
+  color: #858994;
+  font-size: 14px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.product-transition.is-reveal-ready .product-transition-copy h2 span,
+.product-transition.is-reveal-ready .product-transition-summary,
+.product-transition.is-reveal-ready .product-transition-points article {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 820ms var(--ease), transform 920ms var(--ease);
+}
+
+.product-transition.is-reveal-ready .product-transition-copy h2 span:nth-child(2) { transition-delay: 70ms; }
+.product-transition.is-reveal-ready .product-transition-copy h2 span:nth-child(3) { transition-delay: 140ms; }
+.product-transition.is-reveal-ready .product-transition-summary { transition-delay: 210ms; }
+.product-transition.is-reveal-ready .product-transition-points article:nth-child(1) { transition-delay: 290ms; }
+.product-transition.is-reveal-ready .product-transition-points article:nth-child(2) { transition-delay: 370ms; }
+.product-transition.is-reveal-ready .product-transition-points article:nth-child(3) { transition-delay: 450ms; }
+
+.product-transition.is-reveal-ready.is-visible .product-transition-copy h2 span,
+.product-transition.is-reveal-ready.is-visible .product-transition-summary,
+.product-transition.is-reveal-ready.is-visible .product-transition-points article {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.product-transition + .project-quotes-section {
+  margin-top: clamp(72px, 7vw, 96px);
+}
+
+@media (max-width: 760px) {
+  .product-transition {
+    width: calc(100% - 32px);
+    margin-top: 72px;
+  }
+
+  .product-transition h2 {
+    max-width: 16ch;
+    font-size: clamp(34px, 10vw, 44px);
+  }
+
+  .product-transition-summary {
+    max-width: 34rem;
+    margin-top: 18px;
+    font-size: 15px;
+  }
+
+  .product-transition-points {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 44px;
+  }
+
+  .product-transition-points article {
+    padding-top: 16px;
+  }
+
+  .product-transition-points p {
+    max-width: 34rem;
+  }
+
+  .product-transition + .project-quotes-section {
+    margin-top: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-transition::before {
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .product-transition.is-reveal-ready .product-transition-copy h2 span,
+  .product-transition.is-reveal-ready .product-transition-summary,
+  .product-transition.is-reveal-ready .product-transition-points article {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
